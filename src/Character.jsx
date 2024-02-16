@@ -22,14 +22,6 @@ export default function Character(props) {
       break;
   }
 
-  //   // Extract the file names
-  //   const imageFileNames = Object.keys(characterImages).map((path) => {
-  //     // Split the path using forward slashes or backslashes (platform-independent)
-  //     const parts = path.split(/[\\/]/);
-  //     // Get the last part (file name)
-  //     return parts[parts.length - 1];
-  //   });
-
   const imageFileNames = Object.keys(characterImages).map((path) => {
     return path.replace(".", "");
   });

@@ -45,17 +45,16 @@
   border: 2px solid purple;
   display: flex;
   flex-direction: column;
-  /* justify-content: center; */
   height: calc(100vh - 60px);
+
+  /* justify-content: center; */
   /* align-items: flex-start; */
 
   background-image: url("./assets/tiles/background_castle _notransp.png"),
     url("./assets/tiles/background_nightsky.png");
   background-repeat: no-repeat, repeat-x;
   background-size: cover;
-
   animation: slideRight 10s infinite linear;
-  /* slideLeft 10s infinite 10s linear; */
 }
 
 @keyframes slideRight {
@@ -65,19 +64,6 @@
   100% {
     background-position: center, 1874px;
   }
-}
-
-/* @keyframes slideLeft {
-  0% {
-    background-position: center, -1454px;
-  }
-  100% {
-    background-position: center, center;
-  }
-} */
-
-.logo-container {
-  align-self: center;
 }
 
 .menu-container {
@@ -97,13 +83,14 @@
   align-items: center;
 }
 
+/* Styles for fading components in and out */
 .fade-enter {
   opacity: 0;
 }
 
 .fade-enter-active {
   opacity: 1;
-  transition: opacity 450ms ease-in;
+  transition: opacity 5000ms ease-in;
 }
 
 .fade-exit {
@@ -112,5 +99,5 @@
 
 .fade-exit-active {
   opacity: 0;
-  transition: opacity 450ms ease-out;
+  transition: opacity 500ms ease-out;
 }

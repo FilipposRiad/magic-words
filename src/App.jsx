@@ -1,8 +1,7 @@
 import React from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
-import { CSSTransition, TransitionGroup } from "react-transition-group";
+import { CSSTransition } from "react-transition-group";
 import "./App.css";
+import MainMenu from "./MainMenu";
 import Character from "./Character";
 
 // function App() {
@@ -38,32 +37,28 @@ import Character from "./Character";
 // export default App;
 
 export default function App() {
-  const [render, setRender] = React.useState(true);
-  console.log(render);
+  const [inGame, setInGame] = React.useState(false);
 
   return (
-    <div className="main-container">
-      <div className="logo-container">
-        <img
-          src="./src/assets/logo/magic.png"
-          onClick={() => setRender((prevRender) => !prevRender)}
-        />
-        <img src="./src/assets/logo/words.png" />
-      </div>
-      {/* <div className="menu-container">
-        <img src="./src/assets/interface/button_menu.png" />
-      </div> */}
-      <div className="monsters-container">
-        <Character name="roasted_pig" />
-      </div>
-      <CSSTransition in={render} timeout={500} classNames="fade" unmountOnExit>
-        <div className="characters-container">
-          <Character name="tilda" />
-          <Character name="irmgard" />
-          <Character name="werner" />
-          <Character name="ozok" />
+    <>
+      <CSSTransition in={!inGame} timeout={500} classNames="fade" unmountOnExit>
+        <MainMenu setInGame={setInGame} />
+      </CSSTransition>
+
+      <CSSTransition in={inGame} timeout={5000} classNames="fade" unmountOnExit>
+        <div className="main-container">
+          <div className="monsters-container">
+            <Character name="roasted_pig" />
+          </div>
+
+          <div className="characters-container">
+            <Character name="tilda" />
+            <Character name="irmgard" />
+            <Character name="werner" />
+            <Character name="ozok" />
+          </div>
         </div>
       </CSSTransition>
-    </div>
+    </>
   );
 }
