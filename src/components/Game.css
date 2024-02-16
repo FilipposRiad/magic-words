@@ -27,6 +27,13 @@
   align-items: center;
 }
 
+.exit-btn {
+  position: absolute;
+  right: 0px;
+  margin-right: 5rem;
+  margin-top: 1rem;
+}
+
 @keyframes slideRight {
   0% {
     background-position: center, left;

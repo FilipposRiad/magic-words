@@ -46,7 +46,7 @@ export default function App() {
       </CSSTransition>
 
       <CSSTransition in={inGame} timeout={5000} classNames="fade" unmountOnExit>
-        <Game />
+        <Game setInGame={setInGame} />
       </CSSTransition>
     </>
   );
