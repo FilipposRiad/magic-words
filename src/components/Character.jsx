@@ -6,19 +6,19 @@ export default function Character(props) {
   var characterImages;
   switch (props.name) {
     case "irmgard":
-      characterImages = import.meta.glob("./assets/wizards/irmgard/*");
+      characterImages = import.meta.glob("../assets/wizards/irmgard/*");
       break;
     case "ozok":
-      characterImages = import.meta.glob("./assets/wizards/ozok/*");
+      characterImages = import.meta.glob("../assets/wizards/ozok/*");
       break;
     case "tilda":
-      characterImages = import.meta.glob("./assets/wizards/tilda/*");
+      characterImages = import.meta.glob("../assets/wizards/tilda/*");
       break;
     case "werner":
-      characterImages = import.meta.glob("./assets/wizards/werner/*");
+      characterImages = import.meta.glob("../assets/wizards/werner/*");
       break;
     case "roasted_pig":
-      characterImages = import.meta.glob("./assets/monsters/roasted_pig/*");
+      characterImages = import.meta.glob("../assets/monsters/roasted_pig/*");
       break;
   }
 

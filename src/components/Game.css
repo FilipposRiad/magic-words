@@ -1,0 +1,37 @@
+.game-container {
+  border: 2px solid purple;
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 60px);
+
+  /* justify-content: center; */
+  /* align-items: flex-start; */
+
+  background-image: url("../assets/tiles/background_castle _notransp.png"),
+    url("../assets/tiles/background_nightsky.png");
+  background-repeat: no-repeat, repeat-x;
+  background-size: cover;
+  animation: slideRight 10s infinite linear;
+}
+
+.monsters-container {
+  display: flex;
+  justify-content: center;
+}
+
+.characters-container {
+  margin-top: auto;
+  margin-bottom: 3rem;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+@keyframes slideRight {
+  0% {
+    background-position: center, left;
+  }
+  100% {
+    background-position: center, 1874px;
+  }
+}

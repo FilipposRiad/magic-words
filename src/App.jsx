@@ -1,8 +1,8 @@
 import React from "react";
 import { CSSTransition } from "react-transition-group";
 import "./App.css";
-import MainMenu from "./MainMenu";
-import Character from "./Character";
+import MainMenu from "./components/MainMenu";
+import Game from "./components/Game";
 
 // function App() {
 //   const [count, setCount] = useState(0);
@@ -46,18 +46,7 @@ export default function App() {
       </CSSTransition>
 
       <CSSTransition in={inGame} timeout={5000} classNames="fade" unmountOnExit>
-        <div className="main-container">
-          <div className="monsters-container">
-            <Character name="roasted_pig" />
-          </div>
-
-          <div className="characters-container">
-            <Character name="tilda" />
-            <Character name="irmgard" />
-            <Character name="werner" />
-            <Character name="ozok" />
-          </div>
-        </div>
+        <Game />
       </CSSTransition>
     </>
   );
