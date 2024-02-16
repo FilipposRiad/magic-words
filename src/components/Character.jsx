@@ -1,7 +1,7 @@
 import React from "react";
 
 export default function Character(props) {
-  const [characterImage, setCharacterImage] = React.useState("");
+  const [characterImageIndex, setCharacterImageIndex] = React.useState(0);
 
   var characterImages;
   switch (props.name) {
@@ -26,34 +26,25 @@ export default function Character(props) {
     return path.replace(".", "");
   });
 
-  console.log(imageFileNames);
+  React.useEffect(() => {
+    setInterval(() => {
+      setCharacterImageIndex((prev) =>
+        prev === imageFileNames.length - 1 ? 0 : prev + 1
+      );
+    }, 1000);
+  }, []);
 
-  function getRandomCharacterImage() {
-    const randomImageIndex = Math.round(
-      Math.random() * (imageFileNames.length - 1)
-    );
+  // function getRandomCharacterImage() {
+  //   const randomImageIndex = Math.round(
+  //     Math.random() * (imageFileNames.length - 1)
+  //   );
 
-    console.log("GOT RANDOM IMAGE: " + randomImageIndex);
+  //   if (imageFileNames[randomImageIndex] == characterImage) {
+  //     getRandomCharacterImage();
+  //   } else {
+  //     setCharacterImage(imageFileNames[randomImageIndex]);
+  //   }
+  // }
 
-    console.log(imageFileNames[randomImageIndex]);
-
-    if (imageFileNames[randomImageIndex] == characterImage) {
-      getRandomCharacterImage();
-    } else {
-      setCharacterImage(imageFileNames[randomImageIndex]);
-    }
-  }
-
-  return (
-    // <img
-    //   src={`./src/assets/wizards/${props.name}/${
-    //     characterImage ? characterImage : imageFileNames[0]
-    //   }`}
-    //   onClick={getRandomCharacterImage}
-    // />
-    <img
-      src={"./src/" + (characterImage ? characterImage : imageFileNames[0])}
-      onClick={getRandomCharacterImage}
-    />
-  );
+  return <img src={"./src/" + imageFileNames[characterImageIndex]} />;
 }

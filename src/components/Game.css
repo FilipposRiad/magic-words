@@ -8,10 +8,10 @@
   /* align-items: flex-start; */
 
   background-image: url("../assets/tiles/background_castle _notransp.png"),
-    url("../assets/tiles/background_nightsky.png");
+    url("../assets\tiles\infinite_sunset.png");
   background-repeat: no-repeat, repeat-x;
-  background-size: cover;
-  animation: slideRight 10s infinite linear;
+  background-size: cover, 1864px;
+  animation: slideRight 50s infinite linear;
 }
 
 .monsters-container {
@@ -39,6 +39,6 @@
     background-position: center, left;
   }
   100% {
-    background-position: center, 1874px;
+    background-position: center, 1864px;
   }
 }
