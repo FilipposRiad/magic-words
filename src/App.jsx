@@ -41,11 +41,21 @@ export default function App() {
 
   return (
     <>
-      <CSSTransition in={!inGame} timeout={500} classNames="fade" unmountOnExit>
+      <CSSTransition
+        in={!inGame}
+        timeout={inGame ? 0 : 3000}
+        classNames="fade"
+        unmountOnExit
+      >
         <MainMenu setInGame={setInGame} />
       </CSSTransition>
 
-      <CSSTransition in={inGame} timeout={5000} classNames="fade" unmountOnExit>
+      <CSSTransition
+        in={inGame}
+        timeout={inGame ? 3000 : 0}
+        classNames="fade"
+        unmountOnExit
+      >
         <Game setInGame={setInGame} />
       </CSSTransition>
     </>

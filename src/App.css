@@ -52,7 +52,7 @@ img:hover {
 
 .fade-enter-active {
   opacity: 1;
-  transition: opacity 5000ms ease-in;
+  transition: opacity 3000ms ease-in;
 }
 
 .fade-exit {
@@ -61,5 +61,5 @@ img:hover {
 
 .fade-exit-active {
   opacity: 0;
-  transition: opacity 500ms ease-out;
+  transition: opacity 0ms ease-out;
 }
