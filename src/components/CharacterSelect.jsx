@@ -4,7 +4,7 @@ import "./CharacterSelect.css";
 
 export default function CharacterSelect(props) {
   const [character, setCharacter] = React.useState("irmgard");
-  const characters = ["irmgard", "ozok", "tilda", "werner"];
+  const characters = ["irmgard", "ozok", "tilda", "werner", "raagz"];
 
   function nextCharacter() {
     const currentIndex = characters.indexOf(character);

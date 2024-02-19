@@ -34,6 +34,13 @@ export default function Character(props) {
           }
         );
         break;
+      case "raagz":
+        return Object.keys(import.meta.glob("../assets/wizards/raagz/*")).map(
+          (path) => {
+            return path.replace(".", "");
+          }
+        );
+        break;
       case "roasted_pig":
         return Object.keys(
           import.meta.glob("../assets/monsters/roasted_pig/*")
@@ -49,7 +56,7 @@ export default function Character(props) {
       setCharacterImageIndex((prev) =>
         prev === characterImages.length - 1 ? 0 : prev + 1
       );
-    }, 1000);
+    }, 500);
 
     return () => {
       clearInterval(imageUpdateInterval);
