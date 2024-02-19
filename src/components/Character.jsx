@@ -27,11 +27,15 @@ export default function Character(props) {
   });
 
   React.useEffect(() => {
-    setInterval(() => {
+    const imageUpdateInterval = setInterval(() => {
       setCharacterImageIndex((prev) =>
         prev === imageFileNames.length - 1 ? 0 : prev + 1
       );
     }, 1000);
+
+    return () => {
+      clearInterval(imageUpdateInterval);
+    };
   }, []);
 
   // function getRandomCharacterImage() {
