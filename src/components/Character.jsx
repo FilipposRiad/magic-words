@@ -3,40 +3,58 @@ import React from "react";
 export default function Character(props) {
   const [characterImageIndex, setCharacterImageIndex] = React.useState(0);
 
-  var characterImages;
-  switch (props.name) {
-    case "irmgard":
-      characterImages = import.meta.glob("../assets/wizards/irmgard/*");
-      break;
-    case "ozok":
-      characterImages = import.meta.glob("../assets/wizards/ozok/*");
-      break;
-    case "tilda":
-      characterImages = import.meta.glob("../assets/wizards/tilda/*");
-      break;
-    case "werner":
-      characterImages = import.meta.glob("../assets/wizards/werner/*");
-      break;
-    case "roasted_pig":
-      characterImages = import.meta.glob("../assets/monsters/roasted_pig/*");
-      break;
+  const characterImages = fetchCharacterImages(props.name);
+  function fetchCharacterImages(characterName) {
+    switch (characterName) {
+      case "irmgard":
+        return Object.keys(import.meta.glob("../assets/wizards/irmgard/*")).map(
+          (path) => {
+            return path.replace(".", "");
+          }
+        );
+        break;
+      case "ozok":
+        return Object.keys(import.meta.glob("../assets/wizards/ozok/*")).map(
+          (path) => {
+            return path.replace(".", "");
+          }
+        );
+        break;
+      case "tilda":
+        return Object.keys(import.meta.glob("../assets/wizards/tilda/*")).map(
+          (path) => {
+            return path.replace(".", "");
+          }
+        );
+        break;
+      case "werner":
+        return Object.keys(import.meta.glob("../assets/wizards/werner/*")).map(
+          (path) => {
+            return path.replace(".", "");
+          }
+        );
+        break;
+      case "roasted_pig":
+        return Object.keys(
+          import.meta.glob("../assets/monsters/roasted_pig/*")
+        ).map((path) => {
+          return path.replace(".", "");
+        });
+        break;
+    }
   }
-
-  const imageFileNames = Object.keys(characterImages).map((path) => {
-    return path.replace(".", "");
-  });
 
   React.useEffect(() => {
     const imageUpdateInterval = setInterval(() => {
       setCharacterImageIndex((prev) =>
-        prev === imageFileNames.length - 1 ? 0 : prev + 1
+        prev === characterImages.length - 1 ? 0 : prev + 1
       );
     }, 1000);
 
     return () => {
       clearInterval(imageUpdateInterval);
     };
-  }, []);
+  }, [props.name]);
 
   // function getRandomCharacterImage() {
   //   const randomImageIndex = Math.round(
@@ -52,7 +70,7 @@ export default function Character(props) {
 
   return (
     <img
-      src={"./src/" + imageFileNames[characterImageIndex]}
+      src={"./src/" + characterImages[characterImageIndex]}
       style={props.style}
     />
   );
