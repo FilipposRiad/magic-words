@@ -8,7 +8,7 @@ export default function Game(props) {
       <div className="exit-btn">
         <img
           src="./src\assets\interface\arrow_left.png"
-          onClick={() => props.setInGame(false)}
+          onClick={() => props.setScreen("mainMenu")}
         />
       </div>
 

@@ -3,6 +3,7 @@ import { CSSTransition } from "react-transition-group";
 import "./App.css";
 import MainMenu from "./components/MainMenu";
 import Game from "./components/Game";
+import CharacterSelect from "./components/CharacterSelect";
 
 // function App() {
 //   const [count, setCount] = useState(0);
@@ -37,26 +38,35 @@ import Game from "./components/Game";
 // export default App;
 
 export default function App() {
-  const [inGame, setInGame] = React.useState(false);
+  const [screen, setScreen] = React.useState("mainMenu");
 
   return (
     <>
       <CSSTransition
-        in={!inGame}
-        timeout={inGame ? 0 : 3000}
+        in={screen === "mainMenu"}
+        timeout={screen === "mainMenu" ? 3000 : 0}
         classNames="fade"
         unmountOnExit
       >
-        <MainMenu setInGame={setInGame} />
+        <MainMenu setScreen={setScreen} />
       </CSSTransition>
 
       <CSSTransition
-        in={inGame}
-        timeout={inGame ? 3000 : 0}
+        in={screen === "characterSelect"}
+        timeout={screen === "characterSelect" ? 3000 : 0}
         classNames="fade"
         unmountOnExit
       >
-        <Game setInGame={setInGame} />
+        <CharacterSelect setScreen={setScreen} />
+      </CSSTransition>
+
+      <CSSTransition
+        in={screen === "game"}
+        timeout={screen === "game" ? 3000 : 0}
+        classNames="fade"
+        unmountOnExit
+      >
+        <Game setScreen={setScreen} />
       </CSSTransition>
     </>
   );

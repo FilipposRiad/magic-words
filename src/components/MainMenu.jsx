@@ -11,11 +11,12 @@ export default function MainMenu(props) {
       <div className="main-menu-options">
         <img
           src="./src/assets/interface/button_menu.png"
-          onClick={() => props.setInGame(true)}
+          onClick={() => props.setScreen("game")}
         />
         <img
           src="./src/assets/interface/window_scroll.png"
           style={{ width: "112px", height: "134px" }}
+          onClick={() => props.setScreen("characterSelect")}
         />
       </div>
     </div>

@@ -50,5 +50,10 @@ export default function Character(props) {
   //   }
   // }
 
-  return <img src={"./src/" + imageFileNames[characterImageIndex]} />;
+  return (
+    <img
+      src={"./src/" + imageFileNames[characterImageIndex]}
+      style={props.style}
+    />
+  );
 }
