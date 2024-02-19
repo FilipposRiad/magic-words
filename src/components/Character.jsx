@@ -53,6 +53,7 @@ export default function Character(props) {
 
     return () => {
       clearInterval(imageUpdateInterval);
+      setCharacterImageIndex(0);
     };
   }, [props.name]);
 
