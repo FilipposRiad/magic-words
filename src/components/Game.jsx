@@ -5,9 +5,9 @@ import Character from "./Character";
 export default function Game(props) {
   return (
     <div className="game-container">
-      <div className="exit-btn">
+      <div className="menu-btn">
         <img
-          src="./src\assets\interface\arrow_left.png"
+          src="./src\assets\interface\button_menu.png"
           onClick={() => props.setScreen("mainMenu")}
         />
       </div>
