@@ -1,14 +1,46 @@
 .main-menu-container {
   height: calc(100vh - 60px);
-  display: flex;
+  /* display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  align-items: center;
+  align-items: flex-start; */
+  background-image: url("../assets/main_menu/title_clouds_front.png"),
+    url("../assets/main_menu/title_landscape.png"),
+    url("../assets/main_menu/title_clouds_back.png");
+  background-repeat: repeat-x, no-repeat, repeat-x;
+  background-size: 1153px, cover, cover;
+  animation: slide 50s infinite linear;
+}
+
+.logo-container {
+  position: absolute;
 }
 
 .main-menu-options {
-  display: flex;
-  margin-top: 15rem;
-  justify-content: space-evenly;
-  width: 50%;
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.castle {
+  position: absolute;
+  top: 17%;
+  left: 24%;
+  width: 23%;
+}
+
+.library {
+  position: absolute;
+  top: 56%;
+  left: 56%;
+  width: 25%;
+}
+
+@keyframes slide {
+  0% {
+    background-position: left, center, right;
+  }
+  100% {
+    background-position: 1153px, center, left;
+  }
 }
