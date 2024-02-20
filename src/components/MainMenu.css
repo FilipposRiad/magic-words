@@ -1,25 +1,12 @@
 .main-menu-container {
   height: calc(100vh - 60px);
-  /* display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start; */
+  position: relative;
   background-image: url("../assets/main_menu/title_clouds_front.png"),
     url("../assets/main_menu/title_landscape.png"),
     url("../assets/main_menu/title_clouds_back.png");
   background-repeat: repeat-x, no-repeat, repeat-x;
   background-size: 1153px, cover, cover;
   animation: slide 50s infinite linear;
-}
-
-.logo-container {
-  position: absolute;
-}
-
-.main-menu-options {
-  position: relative;
-  width: 100%;
-  height: 100%;
 }
 
 .castle {
