@@ -1,9 +1,22 @@
+.character-select-screen {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  height: calc(100vh - 60px);
+}
+
+.selected-character-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
 .character-select-container {
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  height: calc(100vh - 60px);
   flex-direction: column;
+  grid-column: 2;
 }
 
 .character-name-window {
@@ -82,4 +95,23 @@ h1 {
   font-family: "Micro 5", sans-serif;
   color: #242424;
   text-shadow: #fc0 1px 0 10px;
+}
+
+/* Styles for fading components in and out */
+.fade-enter {
+  opacity: 0;
+}
+
+.fade-enter-active {
+  opacity: 1;
+  transition: opacity 3000ms ease-in;
+}
+
+.fade-exit {
+  opacity: 1;
+}
+
+.fade-exit-active {
+  opacity: 0;
+  transition: opacity 0ms ease-out;
 }
