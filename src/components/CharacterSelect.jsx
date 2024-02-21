@@ -5,8 +5,6 @@ import "./CharacterSelect.css";
 
 export default function CharacterSelect(props) {
   const [currentCharacter, setCurrentCharacter] = React.useState("irmgard");
-  const [playerOneCharacter, setPlayerOneCharacter] = React.useState("");
-  const [playerTwoCharacter, setPlayerTwoCharacter] = React.useState("");
   const [characters, setCharacters] = React.useState([
     "irmgard",
     "ozok",
@@ -34,39 +32,34 @@ export default function CharacterSelect(props) {
   }
 
   function selectCharacter() {
-    if (!playerOneCharacter) {
-      setPlayerOneCharacter(currentCharacter);
-    } else if (!playerTwoCharacter) {
-      setPlayerTwoCharacter(currentCharacter);
-    } else {
-      /* TODO: Start Game */
-      return;
+    if (!props.playerOneCharacter || !props.playerTwoCharacter) {
+      setCharacters((prevCharacters) =>
+        prevCharacters.filter((char) => char !== currentCharacter)
+      );
+
+      nextCharacter();
     }
 
-    setCharacters((prevCharacters) =>
-      prevCharacters.filter((char) => char !== currentCharacter)
-    );
-
-    nextCharacter();
+    props.handleCharacterSelect(currentCharacter);
   }
 
   return (
     <div className="character-select-screen">
       <CSSTransition
-        in={playerOneCharacter !== ""}
-        timeout={playerOneCharacter ? 3000 : 0}
+        in={props.playerOneCharacter !== ""}
+        timeout={props.playerOneCharacter ? 3000 : 0}
         classNames="fade"
         unmountOnExit
       >
         <div className="selected-character-container">
           <div className="character-name-window">
-            <h1>PLAYER 1: {playerOneCharacter.toUpperCase()}</h1>
+            <h1>PLAYER 1: {props.playerOneCharacter.toUpperCase()}</h1>
           </div>
           <div className="character-select-section">
             <div className="character-window">
               <Character
                 style={{ marginBottom: "100px" }}
-                name={playerOneCharacter}
+                name={props.playerOneCharacter}
               />
             </div>
           </div>
@@ -75,10 +68,10 @@ export default function CharacterSelect(props) {
 
       <div className="character-select-container">
         <h1 className="instructions-message">
-          {playerOneCharacter && playerTwoCharacter
+          {props.playerOneCharacter && props.playerTwoCharacter
             ? "START GAME"
             : "SELECT CHARACTER FOR PLAYER " +
-              (!playerOneCharacter ? "ONE" : "TWO")}
+              (!props.playerOneCharacter ? "ONE" : "TWO")}
         </h1>
         <div className="character-name-window">
           <h1>{currentCharacter.toUpperCase()}</h1>
@@ -103,26 +96,28 @@ export default function CharacterSelect(props) {
         </div>
         <div className="select-character-button" onClick={selectCharacter}>
           <h1>
-            {playerOneCharacter && playerTwoCharacter ? "START GAME" : "SELECT"}
+            {props.playerOneCharacter && props.playerTwoCharacter
+              ? "START GAME"
+              : "SELECT"}
           </h1>
         </div>
       </div>
 
       <CSSTransition
-        in={playerTwoCharacter !== ""}
-        timeout={playerTwoCharacter ? 3000 : 0}
+        in={props.playerTwoCharacter !== ""}
+        timeout={props.playerTwoCharacter ? 3000 : 0}
         classNames="fade"
         unmountOnExit
       >
         <div className="selected-character-container">
           <div className="character-name-window">
-            <h1>PLAYER 2: {playerTwoCharacter.toUpperCase()}</h1>
+            <h1>PLAYER 2: {props.playerTwoCharacter.toUpperCase()}</h1>
           </div>
           <div className="character-select-section">
             <div className="character-window">
               <Character
                 style={{ marginBottom: "100px" }}
-                name={playerTwoCharacter}
+                name={props.playerTwoCharacter}
               />
             </div>
           </div>

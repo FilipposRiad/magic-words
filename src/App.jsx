@@ -39,6 +39,19 @@ import CharacterSelect from "./components/CharacterSelect";
 
 export default function App() {
   const [screen, setScreen] = React.useState("mainMenu");
+  const [playerOneCharacter, setPlayerOneCharacter] = React.useState("");
+  const [playerTwoCharacter, setPlayerTwoCharacter] = React.useState("");
+
+  function handleCharacterSelect(character) {
+    if (!playerOneCharacter) {
+      setPlayerOneCharacter(character);
+    } else if (!playerTwoCharacter) {
+      setPlayerTwoCharacter(character);
+    } else {
+      setScreen("game");
+      return;
+    }
+  }
 
   return (
     <>
@@ -57,7 +70,11 @@ export default function App() {
         classNames="fade"
         unmountOnExit
       >
-        <CharacterSelect setScreen={setScreen} />
+        <CharacterSelect
+          playerOneCharacter={playerOneCharacter}
+          playerTwoCharacter={playerTwoCharacter}
+          handleCharacterSelect={handleCharacterSelect}
+        />
       </CSSTransition>
 
       <CSSTransition
