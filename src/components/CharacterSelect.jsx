@@ -26,8 +26,9 @@ export default function CharacterSelect(props) {
 
   return (
     <div className="character-select-container">
+      <h1 className="instructions-message">SELECT CHARACTER FOR PLAYER 1</h1>
       <div className="character-name-window">
-        <h1 className="character-name">{character.toUpperCase()}</h1>
+        <h1>{character.toUpperCase()}</h1>
       </div>
       <div className="character-select-section">
         <img
@@ -43,6 +44,9 @@ export default function CharacterSelect(props) {
           className="arrow-right"
           onClick={nextCharacter}
         />
+      </div>
+      <div className="select-character-button">
+        <h1>SELECT</h1>
       </div>
     </div>
   );

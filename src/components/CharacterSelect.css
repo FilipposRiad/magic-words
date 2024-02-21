@@ -1,7 +1,7 @@
 .character-select-container {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   height: calc(100vh - 60px);
   flex-direction: column;
 }
@@ -55,8 +55,29 @@
   height: 503px;
 }
 
-.character-name {
-  font-size: 62px;
+.select-character-button {
+  background-image: url("..\assets\interface\bar_medium.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 462px;
+  height: 126px;
+  margin-top: 20px;
+  user-select: none;
+}
+
+.select-character-button:active {
+  transform: scale(0.94);
+}
+
+.instructions-message {
+  margin-top: 0px;
+}
+
+h1 {
+  font-size: 56px;
   font-weight: bold;
   font-family: "Micro 5", sans-serif;
   color: #242424;
