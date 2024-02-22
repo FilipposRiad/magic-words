@@ -25,7 +25,7 @@ export default function Game(props) {
           <textarea className="wizardSpeechBubble" />
           <img
             src="./src\assets\interface\CONFIRM_button.png"
-            className="confirm"
+            className="confirm-left"
           />
           <div className="checkmark-left">✅</div>
           <div className="crossmark-left">❎</div>
@@ -42,6 +42,10 @@ export default function Game(props) {
             style={{ position: "absolute", top: "0", left: "0" }}
           />
           <textarea className="wizardSpeechBubble" />
+          <img
+            src="./src\assets\interface\CONFIRM_button.png"
+            className="confirm-right"
+          />
           <div className="checkmark-right">✅</div>
           <div className="crossmark-right">❎</div>
         </div>

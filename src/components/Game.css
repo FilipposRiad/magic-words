@@ -53,32 +53,6 @@
   transform: scale(0.9);
 }
 
-.confirm {
-  position: absolute;
-  left: 160px;
-  top: 70px;
-  cursor: pointer;
-  user-select: none;
-  animation: moveInCircle 2s linear infinite;
-}
-
-.confirm:active {
-  transform: scale(0.9);
-  animation: none;
-}
-
-@keyframes moveInCircle {
-  0% {
-    transform: translate(0px, 0px);
-  }
-  50% {
-    transform: translate(0px, 15px);
-  }
-  100% {
-    transform: translate(0px, 0px);
-  }
-}
-
 .crossmark-left {
   position: absolute;
   left: 14px;
@@ -90,6 +64,20 @@
 
 .crossmark-left:active {
   transform: scale(0.9);
+}
+
+.confirm-left {
+  position: absolute;
+  left: 160px;
+  top: 70px;
+  cursor: pointer;
+  user-select: none;
+  animation: quillMotionLeft 2s linear infinite;
+}
+
+.confirm-left:active {
+  transform: scale(0.9);
+  animation: none;
 }
 
 .checkmark-right {
@@ -118,6 +106,20 @@
   transform: scale(0.9);
 }
 
+.confirm-right {
+  position: absolute;
+  right: 140px;
+  top: 70px;
+  cursor: pointer;
+  user-select: none;
+  animation: quillMotionRight 2s linear infinite;
+}
+
+.confirm-right:active {
+  transform: scaleX(-1) scale(0.9);
+  animation: none;
+}
+
 .characters-container {
   display: flex;
   justify-content: space-evenly;
@@ -138,5 +140,29 @@
   }
   100% {
     background-position: center, 1864px;
+  }
+}
+
+@keyframes quillMotionLeft {
+  0% {
+    transform: translate(0px, 0px);
+  }
+  50% {
+    transform: translate(0px, 15px);
+  }
+  100% {
+    transform: translate(0px, 0px);
+  }
+}
+
+@keyframes quillMotionRight {
+  0% {
+    transform: translate(0px, 0px) scaleX(-1);
+  }
+  50% {
+    transform: translate(0px, 15px) scaleX(-1);
+  }
+  100% {
+    transform: translate(0px, 0px) scaleX(-1);
   }
 }
