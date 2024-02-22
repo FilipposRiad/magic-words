@@ -19,12 +19,32 @@
   justify-content: center;
 }
 
-.characters-container {
+.speech-bubbles-container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
   margin-top: auto;
-  margin-bottom: 3rem;
+}
+
+.wizardSpeechBubble {
+  resize: none;
+  position: absolute;
+  width: 260px;
+  height: 54px;
+  top: 2px;
+  border: none;
+  outline: none;
+  background-color: transparent;
+  overflow: hidden;
+  font-family: cursive;
+  font-weight: bold;
+}
+
+.characters-container {
   display: flex;
   justify-content: space-evenly;
   align-items: center;
+  margin-bottom: 3rem;
 }
 
 .menu-btn {

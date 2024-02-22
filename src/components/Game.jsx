@@ -16,6 +16,23 @@ export default function Game(props) {
         <Character name="roasted_pig" />
       </div>
 
+      <div className="speech-bubbles-container">
+        <div style={{ position: "relative", width: "270px", height: "83px" }}>
+          <img
+            src=".\src\assets\tiles\speechbubble_wiz1.png"
+            style={{ position: "absolute", top: "0", left: "0" }}
+          />
+          <textarea className="wizardSpeechBubble" />
+        </div>
+        <div style={{ position: "relative", width: "266px", height: "83px" }}>
+          <img
+            src=".\src\assets\tiles\speechbubble_wiz2.png"
+            style={{ position: "absolute", top: "0", left: "0" }}
+          />
+          <textarea className="wizardSpeechBubble" />
+        </div>
+      </div>
+
       <div className="characters-container">
         <Character name={props.playerOneCharacter} />
         <Character name={props.playerTwoCharacter} />
