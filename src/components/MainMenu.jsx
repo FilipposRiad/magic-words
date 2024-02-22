@@ -11,7 +11,7 @@ export default function MainMenu(props) {
         className="castle"
       />
       <img
-        src="./src/assets/main_menu/title_library.png"
+        src="./src/assets/main_menu/title_library3.png"
         // onClick={() => props.setScreen("characterSelect")}
         className="library"
       />
