@@ -53,6 +53,32 @@
   transform: scale(0.9);
 }
 
+.confirm {
+  position: absolute;
+  left: 160px;
+  top: 70px;
+  cursor: pointer;
+  user-select: none;
+  animation: moveInCircle 2s linear infinite;
+}
+
+.confirm:active {
+  transform: scale(0.9);
+  animation: none;
+}
+
+@keyframes moveInCircle {
+  0% {
+    transform: translate(0px, 0px);
+  }
+  50% {
+    transform: translate(0px, 15px);
+  }
+  100% {
+    transform: translate(0px, 0px);
+  }
+}
+
 .crossmark-left {
   position: absolute;
   left: 14px;

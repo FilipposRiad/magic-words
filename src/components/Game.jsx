@@ -23,6 +23,10 @@ export default function Game(props) {
             style={{ position: "absolute", top: "0", left: "0" }}
           />
           <textarea className="wizardSpeechBubble" />
+          <img
+            src="./src\assets\interface\CONFIRM_button.png"
+            className="confirm"
+          />
           <div className="checkmark-left">✅</div>
           <div className="crossmark-left">❎</div>
         </div>
