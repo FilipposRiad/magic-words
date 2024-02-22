@@ -17,10 +17,8 @@ export default function Game(props) {
       </div>
 
       <div className="characters-container">
-        <Character name="tilda" />
-        <Character name="irmgard" />
-        <Character name="werner" />
-        <Character name="ozok" />
+        <Character name={props.playerOneCharacter} />
+        <Character name={props.playerTwoCharacter} />
       </div>
     </div>
   );

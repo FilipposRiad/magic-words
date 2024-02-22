@@ -83,7 +83,11 @@ export default function App() {
         classNames="fade"
         unmountOnExit
       >
-        <Game setScreen={setScreen} />
+        <Game
+          setScreen={setScreen}
+          playerOneCharacter={playerOneCharacter}
+          playerTwoCharacter={playerTwoCharacter}
+        />
       </CSSTransition>
     </>
   );
