@@ -23,13 +23,23 @@ export default function Game(props) {
             style={{ position: "absolute", top: "0", left: "0" }}
           />
           <textarea className="wizardSpeechBubble" />
+          <div className="checkmark-left">✅</div>
+          <div className="crossmark-left">❎</div>
         </div>
-        <div style={{ position: "relative", width: "266px", height: "83px" }}>
+        <div
+          style={{
+            position: "relative",
+            width: "266px",
+            height: "83px",
+          }}
+        >
           <img
             src=".\src\assets\tiles\speechbubble_wiz2.png"
             style={{ position: "absolute", top: "0", left: "0" }}
           />
           <textarea className="wizardSpeechBubble" />
+          <div className="checkmark-right">✅</div>
+          <div className="crossmark-right">❎</div>
         </div>
       </div>
 

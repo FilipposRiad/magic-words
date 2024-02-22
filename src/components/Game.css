@@ -30,7 +30,7 @@
   resize: none;
   position: absolute;
   width: 260px;
-  height: 54px;
+  height: 34px;
   top: 2px;
   border: none;
   outline: none;
@@ -38,6 +38,58 @@
   overflow: hidden;
   font-family: cursive;
   font-weight: bold;
+}
+
+.checkmark-left {
+  position: absolute;
+  left: -8px;
+  top: 45px;
+  cursor: pointer;
+  font-size: 20px;
+  user-select: none;
+}
+
+.checkmark-left:active {
+  transform: scale(0.9);
+}
+
+.crossmark-left {
+  position: absolute;
+  left: 14px;
+  top: 45px;
+  cursor: pointer;
+  font-size: 20px;
+  user-select: none;
+}
+
+.crossmark-left:active {
+  transform: scale(0.9);
+}
+
+.checkmark-right {
+  position: absolute;
+  right: 14px;
+  top: 45px;
+  cursor: pointer;
+  font-size: 20px;
+  user-select: none;
+}
+
+.checkmark-right:active {
+  transform: scale(0.9);
+}
+
+.crossmark-right {
+  position: absolute;
+  right: -8px;
+  top: 45px;
+  cursor: pointer;
+  font-size: 20px;
+  user-select: none;
+}
+
+.crossmark-right:active {
+  transform: scale(0.9);
 }
 
 .characters-container {
