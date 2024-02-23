@@ -45,7 +45,7 @@ export default function Game(props) {
     <div className="game-container">
       <div className="menu-btn">
         <img
-          src="./src\assets\interface\button_menu.png"
+          src="./src\assets\interface\button_menu_2.png"
           onClick={() => props.setScreen("mainMenu")}
         />
       </div>

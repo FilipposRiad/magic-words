@@ -1,0 +1,13 @@
+.library-container {
+  height: calc(100vh - 60px);
+  background-image: url("..\assets\library\lib.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.menu-btn-lib {
+  position: absolute;
+  right: 1%;
+  margin-right: 0;
+  margin-top: 0;
+}

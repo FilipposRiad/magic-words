@@ -4,6 +4,7 @@ import "./App.css";
 import MainMenu from "./components/MainMenu";
 import Game from "./components/Game";
 import CharacterSelect from "./components/CharacterSelect";
+import Library from "./components/Library";
 
 // function App() {
 //   const [count, setCount] = useState(0);
@@ -88,6 +89,15 @@ export default function App() {
           playerOneCharacter={playerOneCharacter}
           playerTwoCharacter={playerTwoCharacter}
         />
+      </CSSTransition>
+
+      <CSSTransition
+        in={screen === "library"}
+        timeout={screen === "library" ? 3000 : 0}
+        classNames="fade"
+        unmountOnExit
+      >
+        <Library setScreen={setScreen} />
       </CSSTransition>
     </>
   );
