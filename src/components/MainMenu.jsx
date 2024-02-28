@@ -2,6 +2,8 @@ import React from "react";
 import "./MainMenu.css";
 
 export default function MainMenu(props) {
+  var clickAudio = new Audio("./src/assets/audio/button.mp3");
+
   return (
     <div className="main-menu-container">
       <img src="./src/assets/logo/logo.png" />
@@ -11,8 +13,11 @@ export default function MainMenu(props) {
         className="castle"
       />
       <img
-        src="./src/assets/main_menu/title_library2.png"
-        onClick={() => props.setScreen("library")}
+        src="./src/assets/main_menu/title_library.png"
+        onClick={() => {
+          props.setScreen("library");
+          clickAudio.play();
+        }}
         className="library"
       />
     </div>

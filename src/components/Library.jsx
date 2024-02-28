@@ -10,6 +10,15 @@ export default function Library(props) {
           onClick={() => props.setScreen("mainMenu")}
         />
       </div>
+      <div className="bookshelf">
+        <img src="./src\assets\library/book_blue.png" className="book" />
+        <img src="./src\assets\library/book_blue.png" className="book" />
+        <img src="./src\assets\library/book_blue.png" className="book" />
+        <img src="./src\assets\library/book_blue.png" className="book" />
+        <img src="./src\assets\library/book_blue.png" className="book" />
+        <img src="./src\assets\library/book_blue.png" className="book" />
+        <img src="./src\assets\library/book_blue.png" className="book" />
+      </div>
     </div>
   );
 }

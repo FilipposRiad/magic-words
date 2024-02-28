@@ -1,33 +1,32 @@
 .main-menu-container {
   height: calc(100vh - 60px);
   position: relative;
-  background-image: url("../assets/main_menu/title_clouds_front.png"),
-    url("../assets/main_menu/title_landscape.png"),
-    url("../assets/main_menu/title_clouds_back.png");
-  background-repeat: repeat-x, no-repeat, repeat-x;
-  background-size: 1153px, cover, cover;
+  background-image: url("../assets/main_menu/title_clouds.png"),
+    url("../assets/main_menu/title.png");
+  background-repeat: repeat-x, no-repeat;
+  background-size: 1415px, cover;
   animation: slide 50s infinite linear;
 }
 
 .castle {
   position: absolute;
-  top: 17%;
-  left: 24%;
-  width: 23%;
+  top: 20%;
+  left: 36%;
+  width: 24%;
 }
 
 .library {
   position: absolute;
-  top: 53%;
-  left: 56%;
+  top: 42%;
+  left: 72%;
   width: 25%;
 }
 
 @keyframes slide {
   0% {
-    background-position: left, center, right;
+    background-position: left, center;
   }
   100% {
-    background-position: 1153px, center, left;
+    background-position: 1415px, center;
   }
 }
