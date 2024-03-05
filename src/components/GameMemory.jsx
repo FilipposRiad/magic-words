@@ -22,23 +22,41 @@ export default function GameMemory() {
   function createCards() {
     if (allWords.length > 0) {
       var randomWords = [];
+      var usedRandomNumbers = [];
 
       for (let i = 0; i < 8; i++) {
-        randomWords.push(getRandomWord());
+        var randomNumber = getRandomNumber(allWords.length - 1);
+
+        while (usedRandomNumbers.includes(randomNumber)) {
+          randomNumber = getRandomNumber(allWords.length - 1);
+        }
+
+        usedRandomNumbers.push(randomNumber);
+        randomWords.push(allWords[randomNumber]);
       }
 
       var createdCards = [];
       randomWords.map((word) => {
-        createdCards.push(<div className="card">{word.text}</div>);
+        createdCards.push(
+          <div key={word.id} className="card">
+            {word.text}
+          </div>
+        );
 
         var translationCardContent = [];
         word.translations.forEach((translation) => {
           translationCardContent.push(
-            <div className="translation">{translation.text}</div>
+            <div key={translation.text} className="translation">
+              {translation.text}
+            </div>
           );
         });
 
-        createdCards.push(<div className="card">{translationCardContent}</div>);
+        createdCards.push(
+          <div key={word.translations[0].id} className="card">
+            {translationCardContent}
+          </div>
+        );
       });
 
       setCards(randomizeCards(createdCards));
@@ -47,10 +65,6 @@ export default function GameMemory() {
 
   function getRandomNumber(range) {
     return Math.round(Math.random() * range);
-  }
-
-  function getRandomWord() {
-    return allWords[getRandomNumber(allWords.length)];
   }
 
   function randomizeCards(cardsToRandomize) {
