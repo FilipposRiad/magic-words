@@ -15,7 +15,7 @@ export default function MainMenu(props) {
       <img
         src="./src/assets/main_menu/title_library.png"
         onClick={() => {
-          props.setScreen("library");
+          props.setScreen("game-memory");
           clickAudio.play();
         }}
         className="library"

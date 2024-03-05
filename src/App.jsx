@@ -3,6 +3,7 @@ import { CSSTransition } from "react-transition-group";
 import "./App.css";
 import MainMenu from "./components/MainMenu";
 import Game from "./components/Game";
+import GameMemory from "./components/GameMemory";
 import CharacterSelect from "./components/CharacterSelect";
 import Library from "./components/Library";
 
@@ -89,6 +90,15 @@ export default function App() {
           playerOneCharacter={playerOneCharacter}
           playerTwoCharacter={playerTwoCharacter}
         />
+      </CSSTransition>
+
+      <CSSTransition
+        in={screen === "game-memory"}
+        timeout={screen === "game-memory" ? 3000 : 0}
+        classNames="fade"
+        unmountOnExit
+      >
+        <GameMemory setScreen={setScreen} />
       </CSSTransition>
 
       <CSSTransition
