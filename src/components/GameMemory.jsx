@@ -27,34 +27,46 @@ export default function GameMemory() {
         randomWords.push(getRandomWord());
       }
 
-      var cards = randomWords.map((word) => {
-        return <div className="card">{word.text}</div>;
-      });
-
+      var createdCards = [];
       randomWords.map((word) => {
-        var cardContent = [];
+        createdCards.push(<div className="card">{word.text}</div>);
 
+        var translationCardContent = [];
         word.translations.forEach((translation) => {
-          cardContent.push(
-            <div
-              className="translation"
-              // style={{ fontSize: word.translations.length > 5 ? "12px" : "" }}
-            >
-              {translation.text}
-            </div>
+          translationCardContent.push(
+            <div className="translation">{translation.text}</div>
           );
         });
 
-        cards.push(<div className="card">{cardContent}</div>);
+        createdCards.push(<div className="card">{translationCardContent}</div>);
       });
 
-      setCards(cards);
+      setCards(randomizeCards(createdCards));
     }
   }
 
+  function getRandomNumber(range) {
+    return Math.round(Math.random() * range);
+  }
+
   function getRandomWord() {
-    var randomNumber = Math.ceil(Math.random() * allWords.length);
-    return allWords[randomNumber];
+    return allWords[getRandomNumber(allWords.length)];
+  }
+
+  function randomizeCards(cardsToRandomize) {
+    var randomizedCards = [];
+    var usedIndices = [];
+
+    while (randomizedCards.length != cardsToRandomize.length) {
+      const index = getRandomNumber(cardsToRandomize.length - 1);
+
+      if (!usedIndices.includes(index)) {
+        randomizedCards.push(cardsToRandomize[index]);
+        usedIndices.push(index);
+      }
+    }
+
+    return randomizedCards;
   }
 
   return (
