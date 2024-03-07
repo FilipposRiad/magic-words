@@ -23,6 +23,10 @@
   flex-direction: column;
 }
 
+.empty-card {
+  background-image: url("..\assets\memory\card_front.png");
+}
+
 .translation {
   flex: 0 1 auto;
 }
