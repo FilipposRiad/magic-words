@@ -23,7 +23,7 @@
   flex-direction: column;
 }
 
-.empty-card {
+.face-down-card {
   background-image: url("..\assets\memory\card_front.png");
 }
 

@@ -4,109 +4,26 @@ import "./GameMemory.css";
 export default function GameMemory() {
   const [allWords, setAllWords] = React.useState([]);
   const [cards, setCards] = React.useState([]);
-  const [flippedCards, setFlippedCards] = React.useState([]);
+  const [flippedCardGridIndices, setFlippedCardGridIndices] = React.useState(
+    []
+  );
 
-  const [cardOneToCompare, setCardOneToCompare] = React.useState();
-  const [cardTwoToCompare, setCardTwoToCompare] = React.useState();
+  const [cardOneToCompareGridIndex, setCardOneToCompareGridIndex] =
+    React.useState();
+  const [cardTwoToCompareGridIndex, setCardTwoToCompareGridIndex] =
+    React.useState();
 
-  const emptyCards = [
-    <div
-      key={0}
-      index={0}
-      className="empty-card"
-      onClick={(event) => flipCard(event.target.getAttribute("index"))}
-    />,
-    <div
-      key={1}
-      index={1}
-      className="empty-card"
-      onClick={(event) => flipCard(event.target.getAttribute("index"))}
-    />,
-    <div
-      key={2}
-      index={2}
-      className="empty-card"
-      onClick={(event) => flipCard(event.target.getAttribute("index"))}
-    />,
-    <div
-      key={3}
-      index={3}
-      className="empty-card"
-      onClick={(event) => flipCard(event.target.getAttribute("index"))}
-    />,
-    <div
-      key={4}
-      index={4}
-      className="empty-card"
-      onClick={(event) => flipCard(event.target.getAttribute("index"))}
-    />,
-    <div
-      key={5}
-      index={5}
-      className="empty-card"
-      onClick={(event) => flipCard(event.target.getAttribute("index"))}
-    />,
-    <div
-      key={6}
-      index={6}
-      className="empty-card"
-      onClick={(event) => flipCard(event.target.getAttribute("index"))}
-    />,
-    <div
-      key={7}
-      index={7}
-      className="empty-card"
-      onClick={(event) => flipCard(event.target.getAttribute("index"))}
-    />,
-    <div
-      key={8}
-      index={8}
-      className="empty-card"
-      onClick={(event) => flipCard(event.target.getAttribute("index"))}
-    />,
-    <div
-      key={9}
-      index={9}
-      className="empty-card"
-      onClick={(event) => flipCard(event.target.getAttribute("index"))}
-    />,
-    <div
-      key={10}
-      index={10}
-      className="empty-card"
-      onClick={(event) => flipCard(event.target.getAttribute("index"))}
-    />,
-    <div
-      key={11}
-      index={11}
-      className="empty-card"
-      onClick={(event) => flipCard(event.target.getAttribute("index"))}
-    />,
-    <div
-      key={12}
-      index={12}
-      className="empty-card"
-      onClick={(event) => flipCard(event.target.getAttribute("index"))}
-    />,
-    <div
-      key={13}
-      index={13}
-      className="empty-card"
-      onClick={(event) => flipCard(event.target.getAttribute("index"))}
-    />,
-    <div
-      key={14}
-      index={14}
-      className="empty-card"
-      onClick={(event) => flipCard(event.target.getAttribute("index"))}
-    />,
-    <div
-      key={15}
-      index={15}
-      className="empty-card"
-      onClick={(event) => flipCard(event.target.getAttribute("index"))}
-    />,
-  ];
+  var faceDownCards = [];
+  for (let i = 0; i < 16; i++) {
+    faceDownCards.push(
+      <div
+        key={i}
+        index={i}
+        className="face-down-card"
+        onClick={() => flipCard(i)}
+      />
+    );
+  }
 
   React.useEffect(() => {
     fetch("http://localhost:3000/words/", {
@@ -121,75 +38,6 @@ export default function GameMemory() {
   React.useEffect(() => {
     createCards();
   }, [allWords]);
-
-  function flipCard(index) {
-    setFlippedCards((prevFlippedCards) => [...prevFlippedCards, index]);
-
-    if (!cardOneToCompare) {
-      console.log("SET CARD ONE");
-      setCardOneToCompare(index);
-    } else if (!cardTwoToCompare) {
-      console.log("SET CARD TWO");
-      setCardTwoToCompare(index);
-    } else {
-      var wordOneIndex = cards[cardOneToCompare].props.word_index;
-      var wordTwoIndex = cards[cardTwoToCompare].props.word_index;
-
-      // console.log(
-      //   cards[cardOneToCompare].props.children[0].props.children,
-      //   cards[cardTwoToCompare]
-      // );
-
-      if (wordOneIndex && wordTwoIndex) {
-        console.log("NO TRANSLATIONS!");
-        clearComparisonCards();
-      } else if (!wordOneIndex && !wordTwoIndex) {
-        console.log("BOTH TRANSLATIONS!");
-        clearComparisonCards();
-      } else {
-        console.log("COMPARING!");
-        const originalWord =
-          allWords[wordOneIndex ? wordOneIndex : wordTwoIndex];
-
-        const translationRef =
-          allWords.indexOf(originalWord) == wordOneIndex
-            ? cards[cardTwoToCompare].props.children[0].props.children
-            : cards[cardOneToCompare].props.children[0].props.children;
-        console.log(originalWord, translationRef);
-        if (
-          originalWord.translations.some(
-            (translation) => translation.text == translationRef
-          )
-        ) {
-          console.log("MATCH!");
-        } else {
-          console.log("NO MATCH!");
-          clearComparisonCards();
-        }
-      }
-
-      setCardOneToCompare(index);
-      setCardTwoToCompare(null);
-    }
-  }
-
-  function clearComparisonCards() {
-    setFlippedCards((prevFlippedCards) => [
-      ...prevFlippedCards.filter(
-        (a) => a != cardOneToCompare && a != cardTwoToCompare
-      ),
-    ]);
-  }
-
-  function displayCards() {
-    var cardsToDisplay = [];
-    for (let i = 0; i < 16; i++) {
-      cardsToDisplay.push(
-        flippedCards.includes(i.toString()) ? cards[i] : emptyCards[i]
-      );
-    }
-    return cardsToDisplay;
-  }
 
   function createCards() {
     if (allWords.length > 0) {
@@ -232,10 +80,6 @@ export default function GameMemory() {
     }
   }
 
-  function getRandomNumber(range) {
-    return Math.round(Math.random() * range);
-  }
-
   function randomizeCards(cardsToRandomize) {
     var randomizedCards = [];
     var usedIndices = [];
@@ -250,6 +94,74 @@ export default function GameMemory() {
     }
 
     return randomizedCards;
+  }
+
+  function getRandomNumber(range) {
+    return Math.round(Math.random() * range);
+  }
+
+  function flipCard(gridIndex) {
+    setFlippedCardGridIndices((prevFlippedCardGridIndices) => [
+      ...prevFlippedCardGridIndices,
+      gridIndex,
+    ]);
+
+    if (!cardOneToCompareGridIndex && cardOneToCompareGridIndex != 0) {
+      setCardOneToCompareGridIndex(gridIndex);
+    } else if (!cardTwoToCompareGridIndex && cardTwoToCompareGridIndex != 0) {
+      setCardTwoToCompareGridIndex(gridIndex);
+    } else {
+      var wordOneIndex = cards[cardOneToCompareGridIndex].props.word_index;
+      var wordTwoIndex = cards[cardTwoToCompareGridIndex].props.word_index;
+
+      if (wordOneIndex && wordTwoIndex) {
+        // Both selected cards are parent words (no translation selected)
+        hideComparisonCards();
+      } else if (!wordOneIndex && !wordTwoIndex) {
+        // Both selected cards are translations (no parent word selected)
+        hideComparisonCards();
+      } else {
+        // Selected a parent word and a translation. As such, comparison now is required
+        const originalWord =
+          allWords[wordOneIndex ? wordOneIndex : wordTwoIndex];
+
+        const translationRef =
+          allWords.indexOf(originalWord) == wordOneIndex
+            ? cards[cardTwoToCompareGridIndex].props.children[0].props.children
+            : cards[cardOneToCompareGridIndex].props.children[0].props.children;
+
+        if (
+          !originalWord.translations.some(
+            (translation) => translation.text == translationRef
+          )
+        ) {
+          // Parent word was not the right match for the selected translation
+          hideComparisonCards();
+        }
+      }
+
+      setCardOneToCompareGridIndex(gridIndex);
+      setCardTwoToCompareGridIndex(null);
+    }
+  }
+
+  function hideComparisonCards() {
+    setFlippedCardGridIndices((prevFlippedCardGridIndices) => [
+      ...prevFlippedCardGridIndices.filter(
+        (i) => i != cardOneToCompareGridIndex && i != cardTwoToCompareGridIndex
+      ),
+    ]);
+  }
+
+  function displayCards() {
+    var cardsToDisplay = [];
+    for (let i = 0; i < 16; i++) {
+      cardsToDisplay.push(
+        flippedCardGridIndices.includes(i) ? cards[i] : faceDownCards[i]
+      );
+    }
+
+    return cardsToDisplay;
   }
 
   return (
