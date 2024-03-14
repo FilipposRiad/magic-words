@@ -1,6 +1,7 @@
 .game-memory-container {
   display: flex;
   justify-content: center;
+  text-align: center;
   align-items: center;
   height: calc(100vh - 60px);
 }
@@ -29,4 +30,25 @@
 
 .translation {
   flex: 0 1 auto;
+}
+
+.flag-ger {
+  width: 250px;
+  height: 150px;
+  align-self: flex-start;
+  margin-right: auto;
+}
+
+.flag-gr {
+  width: 250px;
+  height: 150px;
+  align-self: flex-start;
+  margin-left: auto;
+}
+
+.mismatch-counter {
+  font-size: 30px;
+  font-family: cursive;
+  font-weight: bold;
+  color: orange;
 }

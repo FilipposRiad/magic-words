@@ -7,11 +7,11 @@ export default function GameMemory() {
   const [flippedCardGridIndices, setFlippedCardGridIndices] = React.useState(
     []
   );
-
   const [cardOneToCompareGridIndex, setCardOneToCompareGridIndex] =
     React.useState();
   const [cardTwoToCompareGridIndex, setCardTwoToCompareGridIndex] =
     React.useState();
+  const [mismatchCounter, setMismatchCounter] = React.useState(0);
 
   var faceDownCards = [];
   for (let i = 0; i < 16; i++) {
@@ -39,7 +39,13 @@ export default function GameMemory() {
     createCards();
   }, [allWords]);
 
-  function createCards() {
+  function createCards(language = "Greek") {
+    setCards([]);
+    setFlippedCardGridIndices([]);
+    setCardOneToCompareGridIndex(null);
+    setCardTwoToCompareGridIndex(null);
+    setMismatchCounter(0);
+
     if (allWords.length > 0) {
       var createdCards = [];
       var usedIndices = [];
@@ -47,7 +53,10 @@ export default function GameMemory() {
       for (let i = 0; i < 8; i++) {
         var randomNumber = getRandomNumber(allWords.length - 1);
 
-        while (usedIndices.includes(randomNumber)) {
+        while (
+          usedIndices.includes(randomNumber) ||
+          allWords[randomNumber].language != language
+        ) {
           randomNumber = getRandomNumber(allWords.length - 1);
         }
 
@@ -116,9 +125,11 @@ export default function GameMemory() {
 
       if (wordOneIndex && wordTwoIndex) {
         // Both selected cards are parent words (no translation selected)
+        setMismatchCounter((prevMismatchCounter) => prevMismatchCounter + 1);
         hideComparisonCards();
       } else if (!wordOneIndex && !wordTwoIndex) {
         // Both selected cards are translations (no parent word selected)
+        setMismatchCounter((prevMismatchCounter) => prevMismatchCounter + 1);
         hideComparisonCards();
       } else {
         // Selected a parent word and a translation. As such, comparison now is required
@@ -136,6 +147,7 @@ export default function GameMemory() {
           )
         ) {
           // Parent word was not the right match for the selected translation
+          setMismatchCounter((prevMismatchCounter) => prevMismatchCounter + 1);
           hideComparisonCards();
         }
       }
@@ -166,7 +178,21 @@ export default function GameMemory() {
 
   return (
     <div className="game-memory-container">
-      <div className="game-memory-grid">{displayCards()}</div>
+      <img
+        src="./src\assets\memory\germany_flag.webp"
+        className="flag-ger"
+        onClick={() => createCards("German")}
+      />
+      <div>
+        <h3 className="mismatch-counter">Mismatches: {mismatchCounter}</h3>
+        <div className="game-memory-grid">{displayCards()}</div>
+      </div>
+
+      <img
+        src="./src\assets\memory\greece_flag.png"
+        className="flag-gr"
+        onClick={() => createCards("Greek")}
+      />
     </div>
   );
 }
