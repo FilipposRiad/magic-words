@@ -12,6 +12,7 @@ export default function GameMemory() {
   const [cardTwoToCompareGridIndex, setCardTwoToCompareGridIndex] =
     React.useState();
   const [mismatchCounter, setMismatchCounter] = React.useState(0);
+  const [selectedLanguage, setSelectedLanguage] = React.useState();
 
   var faceDownCards = [];
   for (let i = 0; i < 16; i++) {
@@ -45,6 +46,7 @@ export default function GameMemory() {
     setCardOneToCompareGridIndex(null);
     setCardTwoToCompareGridIndex(null);
     setMismatchCounter(0);
+    setSelectedLanguage(language);
 
     if (allWords.length > 0) {
       var createdCards = [];
@@ -174,6 +176,33 @@ export default function GameMemory() {
     }
 
     return cardsToDisplay;
+  }
+
+  async function postStatistics(data = {}) {
+    const response = await fetch("http://localhost:3000/memoryGameStatistics", {
+      method: "POST",
+      mode: "cors",
+      cache: "no-cache",
+      credentials: "same-origin",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      redirect: "follow",
+      referrerPolicy: "no-referrer",
+      body: JSON.stringify(data),
+    });
+    return response.json();
+  }
+
+  if (flippedCardGridIndices.length === 16) {
+    // Player matched all cards
+    postStatistics({
+      mismatches: mismatchCounter,
+      language: selectedLanguage,
+    });
+    // .then((response) => {
+    //   console.log(response);
+    // });
   }
 
   return (
