@@ -178,7 +178,7 @@ export default function GameMemory() {
     return cardsToDisplay;
   }
 
-  async function postStatistics(data = {}) {
+  async function postGameStatistics(data = {}) {
     const response = await fetch("http://localhost:3000/memoryGameStatistics", {
       method: "POST",
       mode: "cors",
@@ -194,15 +194,41 @@ export default function GameMemory() {
     return response.json();
   }
 
+  async function updateWordsStatistics(data = {}) {
+    const response = await fetch(
+      "http://localhost:3000/words/updateWordsStatistics",
+      {
+        method: "POST",
+        mode: "cors",
+        cache: "no-cache",
+        credentials: "same-origin",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        redirect: "follow",
+        referrerPolicy: "no-referrer",
+        body: JSON.stringify(data),
+      }
+    );
+    return response.json();
+  }
+
   if (flippedCardGridIndices.length === 16) {
     // Player matched all cards
-    postStatistics({
+    postGameStatistics({
       mismatches: mismatchCounter,
       language: selectedLanguage,
     });
     // .then((response) => {
     //   console.log(response);
     // });
+
+    updateWordsStatistics({
+      ids: cards
+        .filter((c) => c.props.word_index !== undefined)
+        .map((w) => w.key),
+    });
+    // .then((response) => console.log(response));
   }
 
   return (
