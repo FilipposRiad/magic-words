@@ -1,14 +1,53 @@
 .main-menu-container {
   height: calc(100vh - 60px);
-  position: relative;
+  /* position: relative; */
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  justify-content: center;
   background-image: url("../assets/main_menu/title_clouds.png"),
-    url("../assets/main_menu/title.png");
+    url("../assets/main_menu/background.png");
   background-repeat: repeat-x, no-repeat;
-  background-size: 1415px, cover;
+  background-size: 1415px, contain;
   animation: slide 50s infinite linear;
 }
 
-.castle {
+.floaty_house {
+  width: 25%;
+  right: 8rem;
+  position: absolute;
+  animation: float 6s linear infinite;
+}
+
+.menu-buttons-grid {
+  display: grid;
+  grid-gap: 20px;
+  grid-template-columns: repeat(2, 318px);
+  grid-template-rows: repeat(3, 100px);
+}
+
+.menu-button {
+  background-image: url("..\assets\interface\bar_large.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 50px;
+  font-weight: bold;
+  font-family: "Micro 5", sans-serif;
+  color: #242424;
+  text-shadow: #fc0 1px 0 10px;
+  flex-direction: column;
+  cursor: pointer;
+  user-select: none;
+}
+
+.menu-button:active {
+  transform: scale(0.99);
+}
+
+/* .castle {
   position: absolute;
   top: 20%;
   left: 36%;
@@ -20,7 +59,7 @@
   top: 42%;
   left: 72%;
   width: 25%;
-}
+} */
 
 @keyframes slide {
   0% {
@@ -28,5 +67,17 @@
   }
   100% {
     background-position: 1415px, center;
+  }
+}
+
+@keyframes float {
+  0% {
+    transform: translate(0px, 0px);
+  }
+  50% {
+    transform: translate(0px, 20px);
+  }
+  100% {
+    transform: translate(0px, 0px);
   }
 }
