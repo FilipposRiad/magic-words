@@ -12,7 +12,7 @@ export default function GameMemory() {
   const [cardTwoToCompareGridIndex, setCardTwoToCompareGridIndex] =
     React.useState();
   const [mismatchCounter, setMismatchCounter] = React.useState(0);
-  const [selectedLanguage, setSelectedLanguage] = React.useState();
+  const [selectedLanguage, setSelectedLanguage] = React.useState("German");
 
   var faceDownCards = [];
   for (let i = 0; i < 16; i++) {
@@ -27,6 +27,14 @@ export default function GameMemory() {
   }
 
   React.useEffect(() => {
+    getAllWords();
+  }, []);
+
+  React.useEffect(() => {
+    createCards();
+  }, [allWords]);
+
+  function getAllWords() {
     fetch("http://localhost:3000/words/", {
       method: "GET",
     })
@@ -34,30 +42,49 @@ export default function GameMemory() {
       .then((json) => {
         setAllWords(json);
       });
-  }, []);
+  }
 
-  React.useEffect(() => {
-    createCards();
-  }, [allWords]);
-
-  function createCards(language = "Greek") {
-    setCards([]);
+  function newGame(language) {
     setFlippedCardGridIndices([]);
+    setSelectedLanguage(language);
+    setCards([]);
     setCardOneToCompareGridIndex(null);
     setCardTwoToCompareGridIndex(null);
     setMismatchCounter(0);
-    setSelectedLanguage(language);
+    getAllWords();
+  }
 
+  function createCards() {
     if (allWords.length > 0) {
       var createdCards = [];
       var usedIndices = [];
+
+      var maxTimesEncountered = Math.max.apply(
+        null,
+        allWords
+          .filter((w) => w.statistics != null && w.language == selectedLanguage)
+          .map((w) => w.statistics.timesEncountered)
+      );
+
+      var availableWords = allWords.filter(
+        (w) =>
+          w.language == selectedLanguage &&
+          w.statistics != null &&
+          w.statistics.timesEncountered < maxTimesEncountered
+      ).length;
+
+      if (availableWords < 8) {
+        maxTimesEncountered++;
+      }
 
       for (let i = 0; i < 8; i++) {
         var randomNumber = getRandomNumber(allWords.length - 1);
 
         while (
           usedIndices.includes(randomNumber) ||
-          allWords[randomNumber].language != language
+          allWords[randomNumber].language != selectedLanguage ||
+          allWords[randomNumber].statistics.timesEncountered >=
+            maxTimesEncountered
         ) {
           randomNumber = getRandomNumber(allWords.length - 1);
         }
@@ -236,7 +263,9 @@ export default function GameMemory() {
       <img
         src="./src\assets\memory\germany_flag.webp"
         className="flag-ger"
-        onClick={() => createCards("German")}
+        onClick={() => {
+          newGame("German");
+        }}
       />
       <div>
         <h3 className="mismatch-counter">Mismatches: {mismatchCounter}</h3>
@@ -246,7 +275,9 @@ export default function GameMemory() {
       <img
         src="./src\assets\memory\greece_flag.png"
         className="flag-gr"
-        onClick={() => createCards("Greek")}
+        onClick={() => {
+          newGame("Greek");
+        }}
       />
     </div>
   );
