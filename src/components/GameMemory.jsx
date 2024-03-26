@@ -1,5 +1,6 @@
 import React from "react";
 import "./GameMemory.css";
+import Confetti from "react-confetti";
 
 export default function GameMemory() {
   const [allWords, setAllWords] = React.useState([]);
@@ -99,13 +100,19 @@ export default function GameMemory() {
         );
 
         var translationCardContent = [];
-        currentWord.translations.forEach((translation) => {
+        var count = 0;
+        for (let translation of currentWord.translations) {
           translationCardContent.push(
             <div key={translation.text} className="translation">
               {translation.text}
             </div>
           );
-        });
+
+          count++;
+          if (count == 6) {
+            break;
+          }
+        }
 
         createdCards.push(
           <div key={currentWord.translations[0].id} className="card">
@@ -263,11 +270,19 @@ export default function GameMemory() {
       <img
         src="./src\assets\memory\germany_flag.webp"
         className="flag-ger"
+        style={
+          selectedLanguage == "German"
+            ? { filter: "drop-shadow(0 0 2em #61dafbaa)" }
+            : {}
+        }
         onClick={() => {
           newGame("German");
         }}
       />
       <div>
+        {flippedCardGridIndices.length === 16 && (
+          <Confetti width={window.innerWidth} height={window.innerHeight} />
+        )}
         <h3 className="mismatch-counter">Mismatches: {mismatchCounter}</h3>
         <div className="game-memory-grid">{displayCards()}</div>
       </div>
@@ -275,6 +290,11 @@ export default function GameMemory() {
       <img
         src="./src\assets\memory\greece_flag.png"
         className="flag-gr"
+        style={
+          selectedLanguage == "Greek"
+            ? { filter: "drop-shadow(0 0 2em #61dafbaa)" }
+            : {}
+        }
         onClick={() => {
           newGame("Greek");
         }}

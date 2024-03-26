@@ -39,11 +39,19 @@
   margin-right: auto;
 }
 
+.flag-ger:active {
+  transform: scale(0.98);
+}
+
 .flag-gr {
   width: 250px;
   height: 150px;
   align-self: flex-start;
   margin-left: auto;
+}
+
+.flag-gr:active {
+  transform: scale(0.98);
 }
 
 .mismatch-counter {
