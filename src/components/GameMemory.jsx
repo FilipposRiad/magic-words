@@ -14,6 +14,11 @@ export default function GameMemory() {
     React.useState();
   const [mismatchCounter, setMismatchCounter] = React.useState(0);
   const [selectedLanguage, setSelectedLanguage] = React.useState("German");
+  const [prevGames, setPrevGames] = React.useState([]);
+  const [prevGermanGamesDetails, setPrevGermanGamesDetails] = React.useState(
+    []
+  );
+  const [prevGreekGamesDetails, setPrevGreekGamesDetails] = React.useState([]);
 
   var faceDownCards = [];
   for (let i = 0; i < 16; i++) {
@@ -29,11 +34,16 @@ export default function GameMemory() {
 
   React.useEffect(() => {
     getAllWords();
+    getPrevGames();
   }, []);
 
   React.useEffect(() => {
     createCards();
   }, [allWords]);
+
+  React.useEffect(() => {
+    createPrevGamesDetails();
+  }, [prevGames]);
 
   function getAllWords() {
     fetch("http://localhost:3000/words/", {
@@ -45,6 +55,16 @@ export default function GameMemory() {
       });
   }
 
+  function getPrevGames() {
+    fetch("http://localhost:3000/memoryGameStatistics/", {
+      method: "GET",
+    })
+      .then((response) => response.json())
+      .then((json) => {
+        setPrevGames(json);
+      });
+  }
+
   function newGame(language) {
     setFlippedCardGridIndices([]);
     setSelectedLanguage(language);
@@ -53,6 +73,50 @@ export default function GameMemory() {
     setCardTwoToCompareGridIndex(null);
     setMismatchCounter(0);
     getAllWords();
+    getPrevGames();
+  }
+
+  function createPrevGamesDetails() {
+    var germanGamesDetails = [];
+    var greekGameDetails = [];
+
+    const formatter = new Intl.DateTimeFormat("en-US", {
+      day: "2-digit",
+      month: "2-digit",
+      year: "2-digit",
+      hour: "2-digit",
+      minute: "2-digit",
+      hour12: false,
+    });
+
+    for (let prevGameDetails of prevGames.filter(
+      (a) => a.language == "German"
+    )) {
+      const date = new Date(prevGameDetails.date);
+      const formattedDate = formatter.format(date);
+
+      germanGamesDetails.push(
+        <div key={prevGameDetails.id} className="prev-game-details">
+          {formattedDate} - Mismatches: {prevGameDetails.mismatches}
+        </div>
+      );
+    }
+
+    for (let prevGameDetails of prevGames.filter(
+      (a) => a.language == "Greek"
+    )) {
+      const date = new Date(prevGameDetails.date);
+      const formattedDate = formatter.format(date);
+
+      greekGameDetails.push(
+        <div key={prevGameDetails.id} className="prev-game-details">
+          {formattedDate} - Mismatches: {prevGameDetails.mismatches}
+        </div>
+      );
+    }
+
+    setPrevGermanGamesDetails(germanGamesDetails);
+    setPrevGreekGamesDetails(greekGameDetails);
   }
 
   function createCards() {
@@ -267,38 +331,46 @@ export default function GameMemory() {
 
   return (
     <div className="game-memory-container">
-      <img
-        src="./src\assets\memory\germany_flag.webp"
-        className="flag-ger"
-        style={
-          selectedLanguage == "German"
-            ? { filter: "drop-shadow(0 0 2em #61dafbaa)" }
-            : {}
-        }
-        onClick={() => {
-          newGame("German");
-        }}
-      />
+      {flippedCardGridIndices.length === 16 && (
+        <Confetti width={window.innerWidth} height={window.innerHeight} />
+      )}
+
+      <div className="german-container">
+        <img
+          src="./src\assets\memory\germany_flag.webp"
+          className="flag-ger"
+          style={
+            selectedLanguage == "German"
+              ? { filter: "drop-shadow(0 0 2em #61dafbaa)" }
+              : {}
+          }
+          onClick={() => {
+            newGame("German");
+          }}
+        />
+        <div className="prev-games-grid">{prevGermanGamesDetails}</div>
+      </div>
+
       <div>
-        {flippedCardGridIndices.length === 16 && (
-          <Confetti width={window.innerWidth} height={window.innerHeight} />
-        )}
         <h3 className="mismatch-counter">Mismatches: {mismatchCounter}</h3>
         <div className="game-memory-grid">{displayCards()}</div>
       </div>
 
-      <img
-        src="./src\assets\memory\greece_flag.png"
-        className="flag-gr"
-        style={
-          selectedLanguage == "Greek"
-            ? { filter: "drop-shadow(0 0 2em #61dafbaa)" }
-            : {}
-        }
-        onClick={() => {
-          newGame("Greek");
-        }}
-      />
+      <div className="greek-container">
+        <img
+          src="./src\assets\memory\greece_flag.png"
+          className="flag-gr"
+          style={
+            selectedLanguage == "Greek"
+              ? { filter: "drop-shadow(0 0 2em #61dafbaa)" }
+              : {}
+          }
+          onClick={() => {
+            newGame("Greek");
+          }}
+        />
+        <div className="prev-games-grid">{prevGreekGamesDetails}</div>
+      </div>
     </div>
   );
 }

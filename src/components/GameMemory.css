@@ -32,22 +32,49 @@
   flex: 0 1 auto;
 }
 
+.german-container {
+  align-self: flex-start;
+  margin-right: auto;
+}
+
 .flag-ger {
   width: 250px;
   height: 150px;
-  align-self: flex-start;
-  margin-right: auto;
+}
+
+.prev-games-grid {
+  display: grid;
+  grid-template-columns: repeat(1, 250px);
+  grid-template-rows: repeat(5, 80px);
+  margin-top: 40px;
+}
+
+.prev-game-details {
+  background-image: url("..\assets\interface\bar_large.png");
+  background-repeat: no-repeat;
+  background-size: contain;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: cursive;
+  font-size: 13px;
+  font-weight: bold;
+  flex-direction: column;
+  color: orange;
 }
 
 .flag-ger:active {
   transform: scale(0.98);
 }
 
+.greek-container {
+  align-self: flex-start;
+  margin-left: auto;
+}
+
 .flag-gr {
   width: 250px;
   height: 150px;
-  align-self: flex-start;
-  margin-left: auto;
 }
 
 .flag-gr:active {
