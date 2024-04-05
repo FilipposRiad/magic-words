@@ -56,7 +56,7 @@ export default function GameMemory() {
   }
 
   function getPrevGames() {
-    fetch("http://localhost:3000/memoryGameStatistics/", {
+    fetch("http://localhost:3000/memoryGameStatistics/latest", {
       method: "GET",
     })
       .then((response) => response.json())

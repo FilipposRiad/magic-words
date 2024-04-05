@@ -6,6 +6,7 @@ import Game from "./components/Game";
 import GameMemory from "./components/GameMemory";
 import CharacterSelect from "./components/CharacterSelect";
 import Library from "./components/Library";
+import Statistics from "./components/Statistics";
 
 // function App() {
 //   const [count, setCount] = useState(0);
@@ -108,6 +109,15 @@ export default function App() {
         unmountOnExit
       >
         <Library setScreen={setScreen} />
+      </CSSTransition>
+
+      <CSSTransition
+        in={screen === "statistics"}
+        timeout={screen === "statistics" ? 3000 : 0}
+        classNames="fade"
+        unmountOnExit
+      >
+        <Statistics setScreen={setScreen} />
       </CSSTransition>
     </>
   );

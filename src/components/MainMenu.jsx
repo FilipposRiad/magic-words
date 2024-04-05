@@ -36,6 +36,7 @@ export default function MainMenu(props) {
         <div
           className="menu-button"
           onClick={() => {
+            props.setScreen("statistics");
             clickAudio.play();
           }}
         >
