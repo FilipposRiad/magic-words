@@ -132,15 +132,23 @@ export default function Statistics(props) {
 
   return (
     <div className="statistics-container">
-      {data.length > 0 && (
-        <Chart
-          options={{
-            data,
-            primaryAxis,
-            secondaryAxes,
-          }}
+      <div className="menu-btn">
+        <img
+          src="./src\assets\interface\button_menu_2.png"
+          onClick={() => props.setScreen("mainMenu")}
         />
-      )}
+      </div>
+      <div className="chart-container">
+        {data.length > 0 && (
+          <Chart
+            options={{
+              data,
+              primaryAxis,
+              secondaryAxes,
+            }}
+          />
+        )}
+      </div>
     </div>
   );
 }

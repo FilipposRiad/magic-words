@@ -1,4 +1,19 @@
 .statistics-container {
   height: calc(100vh - 60px);
+  display: flex;
+}
+
+.chart-container {
+  width: 80%;
+  height: 80%;
+  margin: auto;
   background-color: white;
+  border: 2px solid orange;
+}
+
+.menu-btn {
+  position: absolute;
+  right: 0px;
+  margin-right: 3%;
+  margin-top: 1%;
 }
