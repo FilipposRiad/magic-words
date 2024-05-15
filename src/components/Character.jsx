@@ -77,9 +77,11 @@ export default function Character(props) {
   // }
 
   return (
-    <img
-      src={"./src/" + characterImages[characterImageIndex]}
-      style={props.style}
-    />
+    characterImages && (
+      <img
+        src={"./src/" + characterImages[characterImageIndex]}
+        style={props.style}
+      />
+    )
   );
 }

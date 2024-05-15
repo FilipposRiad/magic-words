@@ -331,7 +331,7 @@ export default function GameMemory(props) {
 
   return (
     <div>
-      <div className="menu-btn">
+      <div className="menu-btn-memory">
         <img
           src="./src\assets\interface\button_menu_2.png"
           onClick={() => props.setScreen("mainMenu")}

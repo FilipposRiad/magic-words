@@ -45,6 +45,11 @@ export default function App() {
   const [playerOneCharacter, setPlayerOneCharacter] = React.useState("");
   const [playerTwoCharacter, setPlayerTwoCharacter] = React.useState("");
 
+  if (screen == "mainMenu" && (playerOneCharacter || playerTwoCharacter)) {
+    setPlayerOneCharacter("");
+    setPlayerTwoCharacter("");
+  }
+
   function handleCharacterSelect(character) {
     if (!playerOneCharacter) {
       setPlayerOneCharacter(character);

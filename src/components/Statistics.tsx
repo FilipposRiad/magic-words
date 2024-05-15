@@ -132,7 +132,7 @@ export default function Statistics(props) {
 
   return (
     <div className="statistics-container">
-      <div className="menu-btn">
+      <div className="menu-btn-statistics">
         <img
           src="./src\assets\interface\button_menu_2.png"
           onClick={() => props.setScreen("mainMenu")}
