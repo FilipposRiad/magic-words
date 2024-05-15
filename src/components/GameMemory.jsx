@@ -2,7 +2,7 @@ import React from "react";
 import "./GameMemory.css";
 import Confetti from "react-confetti";
 
-export default function GameMemory() {
+export default function GameMemory(props) {
   const [allWords, setAllWords] = React.useState([]);
   const [cards, setCards] = React.useState([]);
   const [flippedCardGridIndices, setFlippedCardGridIndices] = React.useState(
@@ -330,46 +330,55 @@ export default function GameMemory() {
   }
 
   return (
-    <div className="game-memory-container">
-      {flippedCardGridIndices.length === 16 && (
-        <Confetti width={window.innerWidth} height={window.innerHeight} />
-      )}
-
-      <div className="german-container">
+    <div>
+      <div className="menu-btn">
         <img
-          src="./src\assets\memory\germany_flag.webp"
-          className="flag-ger"
-          style={
-            selectedLanguage == "German"
-              ? { filter: "drop-shadow(0 0 2em #61dafbaa)" }
-              : {}
-          }
-          onClick={() => {
-            newGame("German");
-          }}
+          src="./src\assets\interface\button_menu_2.png"
+          onClick={() => props.setScreen("mainMenu")}
         />
-        <div className="prev-games-grid">{prevGermanGamesDetails}</div>
       </div>
 
-      <div>
-        <h3 className="mismatch-counter">Mismatches: {mismatchCounter}</h3>
-        <div className="game-memory-grid">{displayCards()}</div>
-      </div>
+      <div className="game-memory-container">
+        {flippedCardGridIndices.length === 16 && (
+          <Confetti width={window.innerWidth} height={window.innerHeight} />
+        )}
 
-      <div className="greek-container">
-        <img
-          src="./src\assets\memory\greece_flag.png"
-          className="flag-gr"
-          style={
-            selectedLanguage == "Greek"
-              ? { filter: "drop-shadow(0 0 2em #61dafbaa)" }
-              : {}
-          }
-          onClick={() => {
-            newGame("Greek");
-          }}
-        />
-        <div className="prev-games-grid">{prevGreekGamesDetails}</div>
+        <div className="german-container">
+          <img
+            src="./src\assets\memory\germany_flag.webp"
+            className="flag-ger"
+            style={
+              selectedLanguage == "German"
+                ? { filter: "drop-shadow(0 0 2em #61dafbaa)" }
+                : {}
+            }
+            onClick={() => {
+              newGame("German");
+            }}
+          />
+          <div className="prev-games-grid">{prevGermanGamesDetails}</div>
+        </div>
+
+        <div>
+          <h3 className="mismatch-counter">Mismatches: {mismatchCounter}</h3>
+          <div className="game-memory-grid">{displayCards()}</div>
+        </div>
+
+        <div className="greek-container">
+          <img
+            src="./src\assets\memory\greece_flag.png"
+            className="flag-gr"
+            style={
+              selectedLanguage == "Greek"
+                ? { filter: "drop-shadow(0 0 2em #61dafbaa)" }
+                : {}
+            }
+            onClick={() => {
+              newGame("Greek");
+            }}
+          />
+          <div className="prev-games-grid">{prevGreekGamesDetails}</div>
+        </div>
       </div>
     </div>
   );
