@@ -140,7 +140,10 @@ export default function Game(props) {
 
       <div className="characters-container">
         <Character name={props.playerOneCharacter} />
-        <Character name={props.playerTwoCharacter} />
+        <Character
+          name={props.playerTwoCharacter}
+          style={{ transform: "scaleX(-1)" }}
+        />
       </div>
     </div>
   );

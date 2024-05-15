@@ -116,7 +116,7 @@ export default function CharacterSelect(props) {
           <div className="character-select-section">
             <div className="character-window">
               <Character
-                style={{ marginBottom: "100px" }}
+                style={{ transform: "scaleX(-1)", marginBottom: "100px" }}
                 name={props.playerTwoCharacter}
               />
             </div>
