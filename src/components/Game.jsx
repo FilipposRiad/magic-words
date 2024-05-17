@@ -3,40 +3,107 @@ import "./Game.css";
 import Character from "./Character";
 
 export default function Game(props) {
+  const [germanWords, setGermanWords] = React.useState([]);
+  const [greekWords, setGreekWords] = React.useState([]);
   const [turn, setTurn] = React.useState("playerOne");
-  const [playerOneWords, setPlayerOneWords] = React.useState("");
-  const [playerTwoWords, setPlayerTwoWords] = React.useState("");
+  const [playerOneChallengeWord, setPlayerOneChallengeWord] = React.useState();
+  const [playerTwoChallengeWord, setPlayerTwoChallengeWord] = React.useState();
+  const [playerOneAnswer, setPlayerOneAnswer] = React.useState("");
+  const [playerTwoAnswer, setPlayerTwoAnswer] = React.useState("");
+  const [playerOneScore, setPlayerOneScore] = React.useState(0);
+  const [playerTwoScore, setPlayerTwoScore] = React.useState(0);
+  const [playerOneLives, setPlayerOneLives] = React.useState(5);
+  const [playerTwoLives, setPlayerTwoLives] = React.useState(5);
+  const [usedWords, setUsedWords] = React.useState([]);
+
+  React.useEffect(() => {
+    getAllWords();
+  }, []);
+
+  React.useEffect(() => {
+    setupGame();
+  }, [germanWords]);
+
+  function getAllWords() {
+    fetch("http://localhost:3000/words/", {
+      method: "GET",
+    })
+      .then((response) => response.json())
+      .then((json) => {
+        setGermanWords(
+          json
+            .filter((w) => w.language === "German")
+            .sort(
+              (a, b) =>
+                a.statistics.timesEncountered - b.statistics.timesEncountered
+            )
+        );
+
+        setGreekWords(
+          json
+            .filter((w) => w.language === "Greek")
+            .sort(
+              (a, b) =>
+                a.statistics.timesEncountered - b.statistics.timesEncountered
+            )
+        );
+      });
+  }
+
+  function setupGame() {
+    setPlayerOneChallengeWord(germanWords[0]);
+    setPlayerTwoChallengeWord(greekWords[0]);
+  }
+
+  console.log(playerOneChallengeWord, playerTwoChallengeWord);
 
   function setNextTurn() {
     switch (turn) {
       case "playerOne":
-        if (!playerTwoWords) {
-          setTurn("playerTwo");
-        } else {
-          setTurn("validatePlayerOneWords");
-        }
+        validateWords(turn);
+        setTurn("playerTwo");
         break;
       case "playerTwo":
-        if (!playerOneWords) {
-          setTurn("playerOne");
-        } else {
-          setTurn("validatePlayerTwoWords");
-        }
+        validateWords(turn);
+        setTurn("playerOne");
         break;
     }
   }
 
-  function validateWords(valid) {
+  function validateWords(turn) {
     switch (turn) {
-      case "validatePlayerOneWords":
-        setPlayerOneWords("");
-        setPlayerTwoWords("");
-        setTurn("playerOne");
+      case "playerOne":
+        if (
+          playerOneChallengeWord.translations
+            .map((t) => t.text)
+            .includes(playerOneAnswer.toLowerCase())
+        ) {
+          setPlayerOneScore((prevScore) => prevScore + 1);
+        } else {
+          setPlayerOneLives((prevLives) => prevLives - 1);
+        }
+
+        setPlayerOneChallengeWord(
+          germanWords[germanWords.indexOf(playerOneChallengeWord) + 1]
+        );
+        setPlayerOneAnswer("");
         break;
-      case "validatePlayerTwoWords":
-        setPlayerOneWords("");
-        setPlayerTwoWords("");
-        setTurn("playerTwo");
+
+      case "playerTwo":
+        if (
+          playerTwoChallengeWord.translations
+            .map((t) => t.text)
+            .includes(playerTwoAnswer.toLowerCase())
+        ) {
+          setPlayerTwoScore((prevScore) => prevScore + 1);
+        } else {
+          setPlayerTwoLives((prevLives) => prevLives - 1);
+        }
+
+        setPlayerTwoChallengeWord(
+          greekWords[greekWords.indexOf(playerTwoChallengeWord) + 1]
+        );
+        setPlayerTwoAnswer("");
         break;
     }
   }
@@ -76,7 +143,7 @@ export default function Game(props) {
           />
           <textarea
             disabled={true}
-            value={playerOneWords}
+            value={playerOneChallengeWord?.text}
             className="monster-speech-bubble"
           />
         </div>
@@ -94,7 +161,7 @@ export default function Game(props) {
           />
           <textarea
             disabled={true}
-            value={playerTwoWords}
+            value={playerTwoChallengeWord?.text}
             className="monster-speech-bubble"
           />
         </div>
@@ -113,8 +180,8 @@ export default function Game(props) {
           />
           <textarea
             disabled={turn !== "playerOne"}
-            value={playerOneWords}
-            onChange={(event) => setPlayerOneWords(event.target.value)}
+            value={playerOneAnswer}
+            onChange={(event) => setPlayerOneAnswer(event.target.value)}
             className="wizard-speech-bubble"
           />
           {turn === "playerOne" && (
@@ -137,8 +204,8 @@ export default function Game(props) {
           />
           <textarea
             disabled={turn !== "playerTwo"}
-            value={playerTwoWords}
-            onChange={(event) => setPlayerTwoWords(event.target.value)}
+            value={playerTwoAnswer}
+            onChange={(event) => setPlayerTwoAnswer(event.target.value)}
             className="wizard-speech-bubble"
           />
           {turn === "playerTwo" && (
@@ -157,6 +224,14 @@ export default function Game(props) {
           name={props.playerTwoCharacter}
           style={{ transform: "scaleX(-1)" }}
         />
+      </div>
+      <div className="score-container">
+        <div>
+          SCORE: {playerOneScore} | LIVES: {playerOneLives}
+        </div>
+        <div>
+          SCORE: {playerTwoScore} | LIVES: {playerTwoLives}
+        </div>
       </div>
     </div>
   );

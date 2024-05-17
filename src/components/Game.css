@@ -116,6 +116,17 @@
   margin-bottom: 3rem;
 }
 
+.score-container {
+  display: flex;
+  justify-content: space-between;
+  margin: 0px 10px;
+  font-size: 46px;
+  font-weight: bold;
+  font-family: "Micro 5", sans-serif;
+  color: #242424;
+  text-shadow: #fc0 1px 0 10px;
+}
+
 .menu-btn {
   position: absolute;
   right: 0px;
