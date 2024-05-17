@@ -19,6 +19,13 @@
   justify-content: center;
 }
 
+.monster-speech-bubbles-container {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  /* margin-top: auto; */
+}
+
 .speech-bubbles-container {
   display: flex;
   justify-content: space-around;
@@ -26,7 +33,21 @@
   margin-top: auto;
 }
 
-.wizardSpeechBubble {
+.monster-speech-bubble {
+  resize: none;
+  position: absolute;
+  width: 260px;
+  height: 34px;
+  bottom: 20px;
+  border: none;
+  outline: none;
+  background-color: transparent;
+  overflow: hidden;
+  font-family: cursive;
+  font-weight: bold;
+}
+
+.wizard-speech-bubble {
   resize: none;
   position: absolute;
   width: 260px;
@@ -40,30 +61,22 @@
   font-weight: bold;
 }
 
-.checkmark-left {
+.speech-bubble-left {
+  position: relative;
+  width: 270px;
+  height: 83px;
+}
+
+.speech-bubble-right {
+  position: relative;
+  width: 266px;
+  height: 83px;
+}
+
+.speech-bubble-img {
   position: absolute;
-  left: -8px;
-  top: 45px;
-  cursor: pointer;
-  font-size: 20px;
-  user-select: none;
-}
-
-.checkmark-left:active {
-  transform: scale(0.9);
-}
-
-.crossmark-left {
-  position: absolute;
-  left: 14px;
-  top: 45px;
-  cursor: pointer;
-  font-size: 20px;
-  user-select: none;
-}
-
-.crossmark-left:active {
-  transform: scale(0.9);
+  top: 0;
+  left: 0;
 }
 
 .confirm-left {
@@ -73,37 +86,12 @@
   cursor: pointer;
   user-select: none;
   animation: quillMotionLeft 2s linear infinite;
+  z-index: 9999;
 }
 
 .confirm-left:active {
   transform: scale(0.9);
   animation: none;
-}
-
-.checkmark-right {
-  position: absolute;
-  right: 14px;
-  top: 45px;
-  cursor: pointer;
-  font-size: 20px;
-  user-select: none;
-}
-
-.checkmark-right:active {
-  transform: scale(0.9);
-}
-
-.crossmark-right {
-  position: absolute;
-  right: -8px;
-  top: 45px;
-  cursor: pointer;
-  font-size: 20px;
-  user-select: none;
-}
-
-.crossmark-right:active {
-  transform: scale(0.9);
 }
 
 .confirm-right {
@@ -113,6 +101,7 @@
   cursor: pointer;
   user-select: none;
   animation: quillMotionRight 2s linear infinite;
+  z-index: 9999;
 }
 
 .confirm-right:active {

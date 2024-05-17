@@ -51,27 +51,71 @@ export default function Game(props) {
       </div>
 
       <div className="monsters-container">
-        <Character name="roasted_pig" />
+        <Character
+          name="roasted_pig"
+          style={{
+            transform: turn.toLowerCase().includes("playerone")
+              ? "scaleX(1)"
+              : "scaleX(-1)",
+          }}
+        />
+      </div>
+
+      <div className="monster-speech-bubbles-container">
+        <div
+          className="speech-bubble-left"
+          style={{
+            visibility: turn.toLowerCase().includes("playerone")
+              ? "visible"
+              : "hidden",
+          }}
+        >
+          <img
+            src=".\src\assets\tiles\speechbubble_monster_left.png"
+            className="speech-bubble-img"
+          />
+          <textarea
+            disabled={true}
+            value={playerOneWords}
+            className="monster-speech-bubble"
+          />
+        </div>
+        <div
+          className="speech-bubble-right"
+          style={{
+            visibility: turn.toLowerCase().includes("playertwo")
+              ? "visible"
+              : "hidden",
+          }}
+        >
+          <img
+            src=".\src\assets\tiles\speechbubble_monster_right.png"
+            className="speech-bubble-img"
+          />
+          <textarea
+            disabled={true}
+            value={playerTwoWords}
+            className="monster-speech-bubble"
+          />
+        </div>
       </div>
 
       <div className="speech-bubbles-container">
         <div
+          className="speech-bubble-left"
           style={{
-            position: "relative",
-            width: "270px",
-            height: "83px",
             opacity: turn.toLowerCase().includes("playerone") ? "1" : "0.65",
           }}
         >
           <img
             src=".\src\assets\tiles\speechbubble_wiz1.png"
-            style={{ position: "absolute", top: "0", left: "0" }}
+            className="speech-bubble-img"
           />
           <textarea
             disabled={turn !== "playerOne"}
             value={playerOneWords}
             onChange={(event) => setPlayerOneWords(event.target.value)}
-            className="wizardSpeechBubble"
+            className="wizard-speech-bubble"
           />
           {turn === "playerOne" && (
             <img
@@ -80,37 +124,22 @@ export default function Game(props) {
               onClick={() => setNextTurn()}
             />
           )}
-          {turn === "validatePlayerOneWords" && (
-            <div className="checkmark-left" onClick={() => validateWords(true)}>
-              ✅
-            </div>
-          )}
-          {turn === "validatePlayerOneWords" && (
-            <div
-              className="crossmark-left"
-              onClick={() => validateWords(false)}
-            >
-              ❎
-            </div>
-          )}
         </div>
         <div
+          className="speech-bubble-right"
           style={{
-            position: "relative",
-            width: "266px",
-            height: "83px",
             opacity: turn.toLowerCase().includes("playertwo") ? "1" : "0.65",
           }}
         >
           <img
             src=".\src\assets\tiles\speechbubble_wiz2.png"
-            style={{ position: "absolute", top: "0", left: "0" }}
+            className="speech-bubble-img"
           />
           <textarea
             disabled={turn !== "playerTwo"}
             value={playerTwoWords}
             onChange={(event) => setPlayerTwoWords(event.target.value)}
-            className="wizardSpeechBubble"
+            className="wizard-speech-bubble"
           />
           {turn === "playerTwo" && (
             <img
@@ -118,22 +147,6 @@ export default function Game(props) {
               className="confirm-right"
               onClick={() => setNextTurn()}
             />
-          )}
-          {turn === "validatePlayerTwoWords" && (
-            <div
-              className="checkmark-right"
-              onClick={() => validateWords(true)}
-            >
-              ✅
-            </div>
-          )}
-          {turn === "validatePlayerTwoWords" && (
-            <div
-              className="crossmark-right"
-              onClick={() => validateWords(false)}
-            >
-              ❎
-            </div>
           )}
         </div>
       </div>
