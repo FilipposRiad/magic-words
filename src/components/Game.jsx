@@ -52,7 +52,6 @@ export default function Game(props) {
 
   function setupGame() {
     setPlayerOneChallengeWord(germanWords[0]);
-    setPlayerTwoChallengeWord(greekWords[0]);
   }
 
   console.log(playerOneChallengeWord, playerTwoChallengeWord);
@@ -83,10 +82,14 @@ export default function Game(props) {
           setPlayerOneLives((prevLives) => prevLives - 1);
         }
 
-        setPlayerOneChallengeWord(
-          germanWords[germanWords.indexOf(playerOneChallengeWord) + 1]
+        setPlayerTwoChallengeWord(
+          greekWords[
+            playerTwoChallengeWord
+              ? greekWords.indexOf(playerTwoChallengeWord) + 1
+              : 0
+          ]
         );
-        setPlayerOneAnswer("");
+        setPlayerTwoAnswer("");
         break;
 
       case "playerTwo":
@@ -100,10 +103,10 @@ export default function Game(props) {
           setPlayerTwoLives((prevLives) => prevLives - 1);
         }
 
-        setPlayerTwoChallengeWord(
-          greekWords[greekWords.indexOf(playerTwoChallengeWord) + 1]
+        setPlayerOneChallengeWord(
+          germanWords[germanWords.indexOf(playerOneChallengeWord) + 1]
         );
-        setPlayerTwoAnswer("");
+        setPlayerOneAnswer("");
         break;
     }
   }
@@ -132,9 +135,7 @@ export default function Game(props) {
         <div
           className="speech-bubble-left"
           style={{
-            visibility: turn.toLowerCase().includes("playerone")
-              ? "visible"
-              : "hidden",
+            opacity: turn.toLowerCase().includes("playerone") ? "1" : "0.65",
           }}
         >
           <img
@@ -143,16 +144,20 @@ export default function Game(props) {
           />
           <textarea
             disabled={true}
-            value={playerOneChallengeWord?.text}
+            value={
+              turn.toLowerCase().includes("playerone")
+                ? playerOneChallengeWord?.text
+                : playerOneChallengeWord?.translations
+                    .map((t) => t.text)
+                    .join(", ")
+            }
             className="monster-speech-bubble"
           />
         </div>
         <div
           className="speech-bubble-right"
           style={{
-            visibility: turn.toLowerCase().includes("playertwo")
-              ? "visible"
-              : "hidden",
+            opacity: turn.toLowerCase().includes("playertwo") ? "1" : "0.65",
           }}
         >
           <img
@@ -161,7 +166,13 @@ export default function Game(props) {
           />
           <textarea
             disabled={true}
-            value={playerTwoChallengeWord?.text}
+            value={
+              turn.toLowerCase().includes("playertwo")
+                ? playerTwoChallengeWord?.text
+                : playerTwoChallengeWord?.translations
+                    .map((t) => t.text)
+                    .join(", ")
+            }
             className="monster-speech-bubble"
           />
         </div>
