@@ -24,6 +24,14 @@ export default function Game(props) {
     setupGame();
   }, [germanWords]);
 
+  React.useEffect(() => {
+    if (playerOneLives == 0 || playerTwoLives == 0) {
+      updateWordsStatistics({
+        ids: usedWords.map((w) => w.id),
+      });
+    }
+  }, [playerOneLives, playerTwoLives]);
+
   function getAllWords() {
     fetch("http://localhost:3000/words/", {
       method: "GET",
@@ -53,8 +61,6 @@ export default function Game(props) {
   function setupGame() {
     setPlayerOneChallengeWord(germanWords[0]);
   }
-
-  console.log(playerOneChallengeWord, playerTwoChallengeWord);
 
   function setNextTurn() {
     switch (turn) {
@@ -90,6 +96,7 @@ export default function Game(props) {
           ]
         );
         setPlayerTwoAnswer("");
+        setUsedWords((prevWords) => [...prevWords, playerOneChallengeWord]);
         break;
 
       case "playerTwo":
@@ -107,8 +114,28 @@ export default function Game(props) {
           germanWords[germanWords.indexOf(playerOneChallengeWord) + 1]
         );
         setPlayerOneAnswer("");
+        setUsedWords((prevWords) => [...prevWords, playerTwoChallengeWord]);
         break;
     }
+  }
+
+  async function updateWordsStatistics(data = {}) {
+    const response = await fetch(
+      "http://localhost:3000/words/updateWordsStatistics",
+      {
+        method: "POST",
+        mode: "cors",
+        cache: "no-cache",
+        credentials: "same-origin",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        redirect: "follow",
+        referrerPolicy: "no-referrer",
+        body: JSON.stringify(data),
+      }
+    );
+    return response.json();
   }
 
   return (
@@ -118,6 +145,24 @@ export default function Game(props) {
           src="./src\assets\interface\button_menu_2.png"
           onClick={() => props.setScreen("mainMenu")}
         />
+      </div>
+
+      <div
+        className="game-end-container"
+        style={{
+          display: playerOneLives == 0 || playerTwoLives == 0 ? "flex" : "none",
+        }}
+      >
+        <img
+          src="./src\assets\interface\bar_large.png"
+          className="game-end-img"
+        />
+        <div className="game-end-message">
+          {playerOneLives == 0
+            ? props.playerTwoCharacter.toUpperCase()
+            : props.playerOneCharacter.toUpperCase()}{" "}
+          WINS!
+        </div>
       </div>
 
       <div className="monsters-container">
@@ -142,17 +187,13 @@ export default function Game(props) {
             src=".\src\assets\tiles\speechbubble_monster_left.png"
             className="speech-bubble-img"
           />
-          <textarea
-            disabled={true}
-            value={
-              turn.toLowerCase().includes("playerone")
-                ? playerOneChallengeWord?.text
-                : playerOneChallengeWord?.translations
-                    .map((t) => t.text)
-                    .join(", ")
-            }
-            className="monster-speech-bubble"
-          />
+          <div className="monster-speech-bubble">
+            {turn.toLowerCase().includes("playerone")
+              ? playerOneChallengeWord?.text
+              : playerOneChallengeWord?.translations
+                  .map((t) => t.text)
+                  .join(", ")}
+          </div>
         </div>
         <div
           className="speech-bubble-right"
@@ -164,17 +205,13 @@ export default function Game(props) {
             src=".\src\assets\tiles\speechbubble_monster_right.png"
             className="speech-bubble-img"
           />
-          <textarea
-            disabled={true}
-            value={
-              turn.toLowerCase().includes("playertwo")
-                ? playerTwoChallengeWord?.text
-                : playerTwoChallengeWord?.translations
-                    .map((t) => t.text)
-                    .join(", ")
-            }
-            className="monster-speech-bubble"
-          />
+          <div className="monster-speech-bubble">
+            {turn.toLowerCase().includes("playertwo")
+              ? playerTwoChallengeWord?.text
+              : playerTwoChallengeWord?.translations
+                  .map((t) => t.text)
+                  .join(", ")}
+          </div>
         </div>
       </div>
 
