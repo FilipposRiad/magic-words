@@ -45,6 +45,26 @@ export default function GameMemory(props) {
     createPrevGamesDetails();
   }, [prevGames]);
 
+  React.useEffect(() => {
+    if (flippedCardGridIndices.length === 16) {
+      // Player matched all cards
+      postGameStatistics({
+        mismatches: mismatchCounter,
+        language: selectedLanguage,
+      });
+      // .then((response) => {
+      //   console.log(response);
+      // });
+
+      updateWordsStatistics({
+        ids: cards
+          .filter((c) => c.props.word_index !== undefined)
+          .map((w) => w.key),
+      });
+      // .then((response) => console.log(response));
+    }
+  }, [flippedCardGridIndices]);
+
   function getAllWords() {
     fetch("http://localhost:3000/words/", {
       method: "GET",
@@ -309,24 +329,6 @@ export default function GameMemory(props) {
       }
     );
     return response.json();
-  }
-
-  if (flippedCardGridIndices.length === 16) {
-    // Player matched all cards
-    postGameStatistics({
-      mismatches: mismatchCounter,
-      language: selectedLanguage,
-    });
-    // .then((response) => {
-    //   console.log(response);
-    // });
-
-    updateWordsStatistics({
-      ids: cards
-        .filter((c) => c.props.word_index !== undefined)
-        .map((w) => w.key),
-    });
-    // .then((response) => console.log(response));
   }
 
   return (
