@@ -80,7 +80,7 @@ export default function Game(props) {
       case "playerOne":
         if (
           playerOneChallengeWord.translations
-            .map((t) => t.text)
+            .map((t) => t.text.toLowerCase())
             .includes(playerOneAnswer.toLowerCase())
         ) {
           setPlayerOneScore((prevScore) => prevScore + 1);
@@ -102,7 +102,7 @@ export default function Game(props) {
       case "playerTwo":
         if (
           playerTwoChallengeWord.translations
-            .map((t) => t.text)
+            .map((t) => t.text.toLowerCase())
             .includes(playerTwoAnswer.toLowerCase())
         ) {
           setPlayerTwoScore((prevScore) => prevScore + 1);
