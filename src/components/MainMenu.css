@@ -1,6 +1,5 @@
 .main-menu-container {
   height: calc(100vh - 60px);
-  /* position: relative; */
   display: flex;
   flex-direction: row;
   align-items: flex-end;
@@ -46,20 +45,6 @@
 .menu-button:active {
   transform: scale(0.99);
 }
-
-/* .castle {
-  position: absolute;
-  top: 20%;
-  left: 36%;
-  width: 24%;
-}
-
-.library {
-  position: absolute;
-  top: 42%;
-  left: 72%;
-  width: 25%;
-} */
 
 @keyframes slide {
   0% {

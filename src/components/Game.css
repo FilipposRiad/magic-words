@@ -1,12 +1,8 @@
 .game-container {
+  /* height: calc(100vh - 60px); */
   border: 2px solid purple;
   display: flex;
   flex-direction: column;
-  /* height: calc(100vh - 60px); */
-
-  /* justify-content: center; */
-  /* align-items: flex-start; */
-
   background-image: url("../assets/tiles/background_castle _notransp.png"),
     url("../assets\tiles\infinite_sunset.png");
   background-repeat: no-repeat, repeat-x;
@@ -23,7 +19,6 @@
   display: flex;
   justify-content: space-evenly;
   align-items: center;
-  /* margin-top: auto; */
 }
 
 .speech-bubbles-container {
