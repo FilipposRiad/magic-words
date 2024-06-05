@@ -340,7 +340,10 @@ export default function GameMemory(props) {
         />
       </div>
 
-      <div className="game-memory-container">
+      <div
+        className="game-memory-container"
+        style={{ zoom: props.smallScreen ? "85%" : "100%" }}
+      >
         {flippedCardGridIndices.length === 16 && (
           <Confetti width={window.innerWidth} height={window.innerHeight} />
         )}

@@ -2,7 +2,7 @@
   border: 2px solid purple;
   display: flex;
   flex-direction: column;
-  height: calc(100vh - 60px);
+  /* height: calc(100vh - 60px); */
 
   /* justify-content: center; */
   /* align-items: flex-start; */

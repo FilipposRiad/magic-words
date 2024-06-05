@@ -61,6 +61,8 @@ export default function App() {
     }
   }
 
+  const smallScreen = window.innerWidth <= 1536 || window.innerHeight <= 472;
+
   return (
     <>
       <CSSTransition
@@ -82,6 +84,7 @@ export default function App() {
           playerOneCharacter={playerOneCharacter}
           playerTwoCharacter={playerTwoCharacter}
           handleCharacterSelect={handleCharacterSelect}
+          smallScreen={smallScreen}
         />
       </CSSTransition>
 
@@ -95,6 +98,7 @@ export default function App() {
           setScreen={setScreen}
           playerOneCharacter={playerOneCharacter}
           playerTwoCharacter={playerTwoCharacter}
+          smallScreen={smallScreen}
         />
       </CSSTransition>
 
@@ -104,7 +108,7 @@ export default function App() {
         classNames="fade"
         unmountOnExit
       >
-        <GameMemory setScreen={setScreen} />
+        <GameMemory setScreen={setScreen} smallScreen={smallScreen} />
       </CSSTransition>
 
       <CSSTransition

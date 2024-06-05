@@ -139,7 +139,13 @@ export default function Game(props) {
   }
 
   return (
-    <div className="game-container">
+    <div
+      className="game-container"
+      style={{
+        zoom: props.smallScreen ? "80%" : "100%",
+        height: props.smallScreen ? "100%" : "calc(100vh - 60px)",
+      }}
+    >
       <div className="menu-btn">
         <img
           src="./src\assets\interface\button_menu_2.png"

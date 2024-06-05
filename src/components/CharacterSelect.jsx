@@ -44,7 +44,10 @@ export default function CharacterSelect(props) {
   }
 
   return (
-    <div className="character-select-screen">
+    <div
+      className="character-select-screen"
+      style={{ zoom: props.smallScreen ? "78%" : "100%" }}
+    >
       <CSSTransition
         in={props.playerOneCharacter !== ""}
         timeout={props.playerOneCharacter ? 3000 : 0}
