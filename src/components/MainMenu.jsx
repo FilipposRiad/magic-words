@@ -25,14 +25,14 @@ export default function MainMenu(props) {
         >
           MEMORY GAME
         </div>
-        <div
+        {/* <div
           className="menu-button"
           onClick={() => {
             clickAudio.play();
           }}
         >
           LIBRARY
-        </div>
+        </div> */}
         <div
           className="menu-button"
           onClick={() => {

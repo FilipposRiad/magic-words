@@ -111,14 +111,14 @@ export default function App() {
         <GameMemory setScreen={setScreen} smallScreen={smallScreen} />
       </CSSTransition>
 
-      <CSSTransition
+      {/* <CSSTransition
         in={screen === "library"}
         timeout={screen === "library" ? 3000 : 0}
         classNames="fade"
         unmountOnExit
       >
         <Library setScreen={setScreen} />
-      </CSSTransition>
+      </CSSTransition> */}
 
       <CSSTransition
         in={screen === "statistics"}
