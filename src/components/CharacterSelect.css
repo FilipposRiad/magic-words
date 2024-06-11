@@ -20,7 +20,7 @@
 }
 
 .character-name-window {
-  background-image: url("..\assets\interface\bar_large.png");
+  background-image: url("src/assets/interface/bar_large.png");
   background-size: cover;
   background-repeat: no-repeat;
   display: flex;
@@ -58,7 +58,7 @@
 }
 
 .character-window {
-  background-image: url("..\assets\interface\window_character_selection.png");
+  background-image: url("src/assets/interface/window_character_selection.png");
   background-size: cover;
   background-repeat: no-repeat;
   display: flex;
@@ -69,7 +69,7 @@
 }
 
 .select-character-button {
-  background-image: url("..\assets\interface\bar_medium.png");
+  background-image: url("src/assets/interface/bar_medium.png");
   background-size: cover;
   background-repeat: no-repeat;
   display: flex;

@@ -23,7 +23,7 @@
 }
 
 .card {
-  background-image: url("..\assets\memory\card_flipped.png");
+  background-image: url("src/assets/memory/card_flipped.png");
   display: flex;
   justify-content: center;
   align-items: center;
@@ -35,7 +35,7 @@
 }
 
 .face-down-card {
-  background-image: url("..\assets\memory\card_front.png");
+  background-image: url("src/assets/memory/card_front.png");
 }
 
 .translation {
@@ -60,7 +60,7 @@
 }
 
 .prev-game-details {
-  background-image: url("..\assets\interface\bar_large.png");
+  background-image: url("src/assets/interface/bar_large.png");
   background-repeat: no-repeat;
   background-size: contain;
   display: flex;

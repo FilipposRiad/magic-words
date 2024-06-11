@@ -26,7 +26,7 @@
 }
 
 .menu-button {
-  background-image: url("..\assets\interface\bar_large.png");
+  background-image: url("src/assets/interface/bar_large.png");
   background-size: contain;
   background-repeat: no-repeat;
   display: flex;
