@@ -35,7 +35,7 @@ export default function Statistics(props) {
   }, [memoryGameStatistics]);
 
   function getMemoryGameStatistics() {
-    fetch("http://localhost:3000/memoryGameStatistics/", {
+    fetch(props.backendIPAddress + "/memoryGameStatistics/", {
       method: "GET",
     })
       .then((response) => response.json())

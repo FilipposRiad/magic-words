@@ -66,7 +66,7 @@ export default function GameMemory(props) {
   }, [flippedCardGridIndices]);
 
   function getAllWords() {
-    fetch("http://localhost:3000/words/", {
+    fetch(props.backendIPAddress + "/words/", {
       method: "GET",
     })
       .then((response) => response.json())
@@ -76,7 +76,7 @@ export default function GameMemory(props) {
   }
 
   function getPrevGames() {
-    fetch("http://localhost:3000/memoryGameStatistics/latest", {
+    fetch(props.backendIPAddress + "/memoryGameStatistics/latest", {
       method: "GET",
     })
       .then((response) => response.json())
@@ -297,24 +297,27 @@ export default function GameMemory(props) {
   }
 
   async function postGameStatistics(data = {}) {
-    const response = await fetch("http://localhost:3000/memoryGameStatistics", {
-      method: "POST",
-      mode: "cors",
-      cache: "no-cache",
-      credentials: "same-origin",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      redirect: "follow",
-      referrerPolicy: "no-referrer",
-      body: JSON.stringify(data),
-    });
+    const response = await fetch(
+      props.backendIPAddress + "/memoryGameStatistics",
+      {
+        method: "POST",
+        mode: "cors",
+        cache: "no-cache",
+        credentials: "same-origin",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        redirect: "follow",
+        referrerPolicy: "no-referrer",
+        body: JSON.stringify(data),
+      }
+    );
     return response.json();
   }
 
   async function updateWordsStatistics(data = {}) {
     const response = await fetch(
-      "http://localhost:3000/words/updateWordsStatistics",
+      props.backendIPAddress + "/words/updateWordsStatistics",
       {
         method: "POST",
         mode: "cors",

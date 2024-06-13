@@ -33,7 +33,7 @@ export default function Game(props) {
   }, [playerOneLives, playerTwoLives]);
 
   function getAllWords() {
-    fetch("http://localhost:3000/words/", {
+    fetch(props.backendIPAddress + "/words/", {
       method: "GET",
     })
       .then((response) => response.json())
@@ -121,7 +121,7 @@ export default function Game(props) {
 
   async function updateWordsStatistics(data = {}) {
     const response = await fetch(
-      "http://localhost:3000/words/updateWordsStatistics",
+      props.backendIPAddress + "/words/updateWordsStatistics",
       {
         method: "POST",
         mode: "cors",

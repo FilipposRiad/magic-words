@@ -12,6 +12,7 @@ export default function App() {
   const [screen, setScreen] = React.useState("mainMenu");
   const [playerOneCharacter, setPlayerOneCharacter] = React.useState("");
   const [playerTwoCharacter, setPlayerTwoCharacter] = React.useState("");
+  const backendIPAddress = "http://localhost:3000";
 
   if (screen == "mainMenu" && (playerOneCharacter || playerTwoCharacter)) {
     setPlayerOneCharacter("");
@@ -67,6 +68,7 @@ export default function App() {
           playerOneCharacter={playerOneCharacter}
           playerTwoCharacter={playerTwoCharacter}
           smallScreen={smallScreen}
+          backendIPAddress={backendIPAddress}
         />
       </CSSTransition>
 
@@ -76,7 +78,11 @@ export default function App() {
         classNames="fade"
         unmountOnExit
       >
-        <GameMemory setScreen={setScreen} smallScreen={smallScreen} />
+        <GameMemory
+          setScreen={setScreen}
+          smallScreen={smallScreen}
+          backendIPAddress={backendIPAddress}
+        />
       </CSSTransition>
 
       {/* <CSSTransition
@@ -94,7 +100,7 @@ export default function App() {
         classNames="fade"
         unmountOnExit
       >
-        <Statistics setScreen={setScreen} />
+        <Statistics setScreen={setScreen} backendIPAddress={backendIPAddress} />
       </CSSTransition>
     </>
   );
