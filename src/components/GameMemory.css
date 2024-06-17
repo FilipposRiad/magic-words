@@ -50,6 +50,7 @@
 .flag-ger {
   width: 250px;
   height: 150px;
+  cursor: pointer;
 }
 
 .prev-games-grid {
@@ -85,6 +86,7 @@
 .flag-gr {
   width: 250px;
   height: 150px;
+  cursor: pointer;
 }
 
 .flag-gr:active {

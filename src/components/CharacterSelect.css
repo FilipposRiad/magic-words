@@ -41,6 +41,7 @@
   width: 72px;
   height: 91px;
   margin-right: 50px;
+  cursor: pointer;
 }
 
 .arrow-left:active {
@@ -51,6 +52,7 @@
   width: 72px;
   height: 91px;
   margin-left: 50px;
+  cursor: pointer;
 }
 
 .arrow-right:active {
@@ -79,6 +81,7 @@
   height: 126px;
   margin-top: 20px;
   user-select: none;
+  cursor: pointer;
 }
 
 .select-character-button:active {
