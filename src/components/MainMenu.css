@@ -42,6 +42,11 @@
   user-select: none;
 }
 
+.under-construction {
+  font-size: 34px;
+  margin-bottom: auto;
+}
+
 .menu-button:active {
   transform: scale(0.99);
 }
