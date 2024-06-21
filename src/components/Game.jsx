@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import "./Game.css";
 import Character from "./Character";
 
@@ -16,6 +16,17 @@ export default function Game(props) {
   const [playerTwoLives, setPlayerTwoLives] = React.useState(5);
   const [usedWords, setUsedWords] = React.useState([]);
 
+  const germanTextAreaRef = useRef(null);
+  const greekTextAreaRef = useRef(null);
+
+  React.useEffect(() => {
+    if (turn == "playerOne") {
+      germanTextAreaRef.current.focus();
+    } else {
+      greekTextAreaRef.current.focus();
+    }
+  }, [turn]);
+
   React.useEffect(() => {
     getAllWords();
   }, []);
@@ -29,6 +40,9 @@ export default function Game(props) {
       updateWordsStatistics({
         ids: usedWords.map((w) => w.id),
       });
+
+      germanTextAreaRef.current.blur();
+      greekTextAreaRef.current.blur();
     }
   }, [playerOneLives, playerTwoLives]);
 
@@ -138,6 +152,13 @@ export default function Game(props) {
     return response.json();
   }
 
+  function handleKeyPress(e) {
+    if (e.keyCode == 13) {
+      e.preventDefault();
+      setNextTurn();
+    }
+  }
+
   return (
     <div
       className="game-container"
@@ -236,6 +257,8 @@ export default function Game(props) {
             disabled={turn !== "playerOne"}
             value={playerOneAnswer}
             onChange={(event) => setPlayerOneAnswer(event.target.value)}
+            onKeyDown={(e) => handleKeyPress(e)}
+            ref={germanTextAreaRef}
             className="wizard-speech-bubble"
           />
           {turn === "playerOne" && (
@@ -260,6 +283,8 @@ export default function Game(props) {
             disabled={turn !== "playerTwo"}
             value={playerTwoAnswer}
             onChange={(event) => setPlayerTwoAnswer(event.target.value)}
+            onKeyDown={(e) => handleKeyPress(e)}
+            ref={greekTextAreaRef}
             className="wizard-speech-bubble"
           />
           {turn === "playerTwo" && (

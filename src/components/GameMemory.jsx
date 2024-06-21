@@ -46,6 +46,7 @@ export default function GameMemory(props) {
   }, [prevGames]);
 
   React.useEffect(() => {
+    // If the game ended (all cards are flipped), post game statistics to the backend and update word statistics
     if (flippedCardGridIndices.length === 16) {
       // Player matched all cards
       postGameStatistics({
@@ -192,6 +193,7 @@ export default function GameMemory(props) {
             </div>
           );
 
+          // Only allow up to 6 translations on each translation card
           count++;
           if (count == 6) {
             break;
@@ -256,6 +258,7 @@ export default function GameMemory(props) {
         const originalWord =
           allWords[wordOneIndex ? wordOneIndex : wordTwoIndex];
 
+        // This gets us the first translation word (as they can be many), as reference to check if it is a right translation of the parent word
         const translationRef =
           allWords.indexOf(originalWord) == wordOneIndex
             ? cards[cardTwoToCompareGridIndex].props.children[0].props.children

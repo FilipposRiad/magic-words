@@ -4,6 +4,7 @@ export default function Character(props) {
   const [characterImageIndex, setCharacterImageIndex] = React.useState(0);
 
   const characterImages = fetchCharacterImages(props.name);
+
   function fetchCharacterImages(characterName) {
     switch (characterName) {
       case "irmgard":
