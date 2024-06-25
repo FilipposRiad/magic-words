@@ -1,12 +1,7 @@
 import React from "react";
 import "./Statistics.css";
 import { AxisOptions, Chart } from "react-charts";
-
-type MemoryGameStatistics = {
-  mismatches: number;
-  date: Date;
-  language: string;
-};
+import { MemoryGameStatistics } from "../interfaces";
 
 type MemoryGameStatisticsData = {
   numberOfGames: string;
