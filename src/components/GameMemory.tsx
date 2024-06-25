@@ -1,34 +1,32 @@
 import React from "react";
 import "./GameMemory.css";
 import Confetti from "react-confetti";
+import { Word, MemoryGameStatistics } from "../interfaces";
 
 export default function GameMemory(props) {
-  const [allWords, setAllWords] = React.useState([]);
-  const [cards, setCards] = React.useState([]);
-  const [flippedCardGridIndices, setFlippedCardGridIndices] = React.useState(
-    []
-  );
+  const [allWords, setAllWords] = React.useState<Word[]>([]);
+  const [cards, setCards] = React.useState<React.JSX.Element[]>([]);
+  const [flippedCardGridIndices, setFlippedCardGridIndices] = React.useState<
+    number[]
+  >([]);
   const [cardOneToCompareGridIndex, setCardOneToCompareGridIndex] =
-    React.useState();
+    React.useState<any>();
   const [cardTwoToCompareGridIndex, setCardTwoToCompareGridIndex] =
-    React.useState();
+    React.useState<any>();
   const [mismatchCounter, setMismatchCounter] = React.useState(0);
   const [selectedLanguage, setSelectedLanguage] = React.useState("German");
-  const [prevGames, setPrevGames] = React.useState([]);
-  const [prevGermanGamesDetails, setPrevGermanGamesDetails] = React.useState(
-    []
-  );
-  const [prevGreekGamesDetails, setPrevGreekGamesDetails] = React.useState([]);
+  const [prevGames, setPrevGames] = React.useState<MemoryGameStatistics[]>([]);
+  const [prevGermanGamesDetails, setPrevGermanGamesDetails] = React.useState<
+    React.JSX.Element[]
+  >([]);
+  const [prevGreekGamesDetails, setPrevGreekGamesDetails] = React.useState<
+    React.JSX.Element[]
+  >([]);
 
-  var faceDownCards = [];
+  var faceDownCards: React.JSX.Element[] = [];
   for (let i = 0; i < 16; i++) {
     faceDownCards.push(
-      <div
-        key={i}
-        index={i}
-        className="face-down-card"
-        onClick={() => flipCard(i)}
-      />
+      <div key={i} className="face-down-card" onClick={() => flipCard(i)} />
     );
   }
 
@@ -57,6 +55,7 @@ export default function GameMemory(props) {
       //   console.log(response);
       // });
 
+      // When a card has a word_index it means that it is a card of a word and not its translation
       updateWordsStatistics({
         ids: cards
           .filter((c) => c.props.word_index !== undefined)
@@ -98,8 +97,8 @@ export default function GameMemory(props) {
   }
 
   function createPrevGamesDetails() {
-    var germanGamesDetails = [];
-    var greekGameDetails = [];
+    var germanGamesDetails: React.JSX.Element[] = [];
+    var greekGameDetails: React.JSX.Element[] = [];
 
     const formatter = new Intl.DateTimeFormat("en-US", {
       day: "2-digit",
@@ -142,8 +141,8 @@ export default function GameMemory(props) {
 
   function createCards() {
     if (allWords.length > 0) {
-      var createdCards = [];
-      var usedIndices = [];
+      var createdCards: any = [];
+      var usedIndices: number[] = [];
 
       var maxTimesEncountered = Math.max.apply(
         null,
@@ -184,7 +183,7 @@ export default function GameMemory(props) {
           </div>
         );
 
-        var translationCardContent = [];
+        var translationCardContent: React.JSX.Element[] = [];
         var count = 0;
         for (let translation of currentWord.translations) {
           translationCardContent.push(
@@ -212,8 +211,8 @@ export default function GameMemory(props) {
   }
 
   function randomizeCards(cardsToRandomize) {
-    var randomizedCards = [];
-    var usedIndices = [];
+    var randomizedCards: any = [];
+    var usedIndices: number[] = [];
 
     while (randomizedCards.length != cardsToRandomize.length) {
       const index = getRandomNumber(cardsToRandomize.length - 1);
@@ -289,7 +288,7 @@ export default function GameMemory(props) {
   }
 
   function displayCards() {
-    var cardsToDisplay = [];
+    var cardsToDisplay: any = [];
     for (let i = 0; i < 16; i++) {
       cardsToDisplay.push(
         flippedCardGridIndices.includes(i) ? cards[i] : faceDownCards[i]

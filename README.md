@@ -1,8 +1,13 @@
-# React + Vite
+# Magic Words
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Magic Words is an app that helps you boost your vocabulary skills through fun and interactive games.
 
-Currently, two official plugins are available:
+Here is a list of the available games and features.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Versus Mode: Compete against a friend and translate as many words as you can until you run out of lives!
+- Memory Game: Brush off your memory skills in this classic memory game where you match words with their translations!
+- Statistics: View your performance in the Memory Game through a chart that displays the average mismatches every 10 games!
+
+Currently supports German and Greek languages, both with English translations.
+
+Link to the app: http://195.179.231.87:5173/
