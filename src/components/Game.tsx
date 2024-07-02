@@ -1,29 +1,32 @@
 import React, { useRef } from "react";
 import "./Game.css";
 import Character from "./Character";
+import { Word } from "../interfaces";
 
 export default function Game(props) {
-  const [germanWords, setGermanWords] = React.useState([]);
-  const [greekWords, setGreekWords] = React.useState([]);
-  const [turn, setTurn] = React.useState("playerOne");
-  const [playerOneChallengeWord, setPlayerOneChallengeWord] = React.useState();
-  const [playerTwoChallengeWord, setPlayerTwoChallengeWord] = React.useState();
-  const [playerOneAnswer, setPlayerOneAnswer] = React.useState("");
-  const [playerTwoAnswer, setPlayerTwoAnswer] = React.useState("");
-  const [playerOneScore, setPlayerOneScore] = React.useState(0);
-  const [playerTwoScore, setPlayerTwoScore] = React.useState(0);
-  const [playerOneLives, setPlayerOneLives] = React.useState(5);
-  const [playerTwoLives, setPlayerTwoLives] = React.useState(5);
-  const [usedWords, setUsedWords] = React.useState([]);
+  const [germanWords, setGermanWords] = React.useState<Word[]>([]);
+  const [greekWords, setGreekWords] = React.useState<Word[]>([]);
+  const [turn, setTurn] = React.useState<string>("playerOne");
+  const [playerOneChallengeWord, setPlayerOneChallengeWord] =
+    React.useState<Word>();
+  const [playerTwoChallengeWord, setPlayerTwoChallengeWord] =
+    React.useState<Word>();
+  const [playerOneAnswer, setPlayerOneAnswer] = React.useState<string>("");
+  const [playerTwoAnswer, setPlayerTwoAnswer] = React.useState<string>("");
+  const [playerOneScore, setPlayerOneScore] = React.useState<number>(0);
+  const [playerTwoScore, setPlayerTwoScore] = React.useState<number>(0);
+  const [playerOneLives, setPlayerOneLives] = React.useState<number>(5);
+  const [playerTwoLives, setPlayerTwoLives] = React.useState<number>(5);
+  const [usedWords, setUsedWords] = React.useState<Word[]>([]);
 
-  const germanTextAreaRef = useRef(null);
-  const greekTextAreaRef = useRef(null);
+  const germanTextAreaRef = useRef<HTMLTextAreaElement>(null);
+  const greekTextAreaRef = useRef<HTMLTextAreaElement>(null);
 
   React.useEffect(() => {
     if (turn == "playerOne") {
-      germanTextAreaRef.current.focus();
+      germanTextAreaRef?.current?.focus();
     } else {
-      greekTextAreaRef.current.focus();
+      greekTextAreaRef?.current?.focus();
     }
   }, [turn]);
 
@@ -38,11 +41,11 @@ export default function Game(props) {
   React.useEffect(() => {
     if (playerOneLives == 0 || playerTwoLives == 0) {
       updateWordsStatistics({
-        ids: usedWords.map((w) => w.id),
+        ids: usedWords?.map((w) => w.id),
       });
 
-      germanTextAreaRef.current.blur();
-      greekTextAreaRef.current.blur();
+      germanTextAreaRef?.current?.blur();
+      greekTextAreaRef?.current?.blur();
     }
   }, [playerOneLives, playerTwoLives]);
 
@@ -54,18 +57,18 @@ export default function Game(props) {
       .then((json) => {
         setGermanWords(
           json
-            .filter((w) => w.language === "German")
+            .filter((w: Word) => w.language === "German")
             .sort(
-              (a, b) =>
+              (a: Word, b: Word) =>
                 a.statistics.timesEncountered - b.statistics.timesEncountered
             )
         );
 
         setGreekWords(
           json
-            .filter((w) => w.language === "Greek")
+            .filter((w: Word) => w.language === "Greek")
             .sort(
-              (a, b) =>
+              (a: Word, b: Word) =>
                 a.statistics.timesEncountered - b.statistics.timesEncountered
             )
         );
@@ -93,7 +96,7 @@ export default function Game(props) {
     switch (turn) {
       case "playerOne":
         if (
-          playerOneChallengeWord.translations
+          playerOneChallengeWord?.translations
             .map((t) => t.text.toLowerCase())
             .includes(playerOneAnswer.toLowerCase())
         ) {
@@ -115,7 +118,7 @@ export default function Game(props) {
 
       case "playerTwo":
         if (
-          playerTwoChallengeWord.translations
+          playerTwoChallengeWord?.translations
             .map((t) => t.text.toLowerCase())
             .includes(playerTwoAnswer.toLowerCase())
         ) {
