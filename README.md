@@ -1,6 +1,6 @@
 # Magic Words
 
-Magic Words is an app that helps you boost your vocabulary skills through fun and interactive games.
+Magic Words is an application that helps you boost your vocabulary skills through fun and interactive games.
 
 Here is a list of the available games and features.
 
@@ -10,4 +10,6 @@ Here is a list of the available games and features.
 
 Currently supports German and Greek languages, both with English translations.
 
-Link to the app: http://195.179.231.87:5173/
+Link to the application: http://195.179.231.87:5173/
+
+Link to the Back-End GitHub page: https://github.com/FilipposRiad/magic-words-backend
